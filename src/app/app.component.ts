@@ -15,11 +15,21 @@ export class AppComponent {
   splitLayoutLocalStorageName = 'elex-splitLayoutLocalStorageName';
   config: LayoutConfig = null;
   defaultConfig: LayoutConfig = new LayoutConfig();
+  isScreenNarrow: boolean = false;
 
   constructor(private infoService: InfoService) {
   }
 
   ngOnInit() {
+    /**
+     * Mobile (Smartphone) max-width: 480px
+     * Low Resolution Tablets and ipads max-width: 767px
+     */
+    this.infoService.changeWidth.asObservable().subscribe(
+      width => {
+        this.isScreenNarrow = width <= 767;
+      });
+
     if (localStorage.getItem(this.splitLayoutLocalStorageName)) {
       this.config = JSON.parse(localStorage.getItem(this.splitLayoutLocalStorageName))
     } else {
@@ -46,6 +56,7 @@ export class AppComponent {
 
   @HostListener('window:resize', ['$event.target'])
   public onResize(target) {
-    this.infoService.changeSize.next(target.innerHeight);
+    this.infoService.changeHeight.next(target.innerHeight);
+    this.infoService.changeWidth.next(target.innerWidth);
   }
 }

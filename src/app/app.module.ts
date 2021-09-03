@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
+import {AccordionModule} from 'primeng/accordion';
 
 import { FulltextPanelComponent } from './fulltext-panel/fulltext-panel.component';
 import { IndexPanelComponent } from './index-panel/index-panel.component';
@@ -39,7 +40,8 @@ import {PaginationComponent} from "./index-panel/pagination/pagination.component
     AngularSplitModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AccordionModule
   ],
   providers: [InfoService],
   bootstrap: [AppComponent]

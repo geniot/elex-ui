@@ -17,7 +17,8 @@ export class InfoService {
   public cssUrl = this.baseApiUrl + '/css';
 
   model: BehaviorSubject<Model> = new BehaviorSubject(new Model());
-  changeSize = new Subject();
+  changeHeight = new Subject();
+  changeWidth = new Subject();
   mouseWheelChangeValue = new Subject();
 
   constructor(public http: HttpClient) {
@@ -30,7 +31,7 @@ export class InfoService {
     this.model.next(m);
     this.model.value.userInputs = new Map();
 
-    this.changeSize
+    this.changeHeight
       .asObservable()
       .pipe(debounceTime(100))
       .subscribe(innerHeight => {
