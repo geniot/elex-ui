@@ -1,0 +1,192 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f9f9f9;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.box .row.header {
+  flex: 0 1 auto;
+  /* The above is shorthand for:
+  flex-grow: 0,
+  flex-shrink: 1,
+  flex-basis: auto
+  */
+}
+
+.box .row.content {
+  flex: 1 1 auto;
+}
+
+.box .row.footer {
+  flex: 0 1 auto;
+}
+
+.ui-widget-header {
+  height: 40px;
+  color: black;
+  text-align: center;
+  border: 0;
+  background: #c9c9c9;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.table {
+  display: table;
+}
+
+.table-row {
+  display: table-row;
+}
+
+.table-cell {
+  display: table-cell;
+}
+
+.body-content-outer-wrapper {
+  height: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.body-content-inner-wrapper {
+  height: 100%;
+  position: relative;
+  overflow: auto;
+}
+
+.body-content {
+  padding-top: 1px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
+.entry-headword {
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.hwd {
+  font-weight: bold;
+}
+
+.m1 {
+  margin-left: 0px;
+}
+
+.m2 {
+  margin-left: 10px;
+}
+
+.m3 {
+  margin-left: 20px;
+}
+
+.m4 {
+  margin-left: 30px;
+}
+
+.m5 {
+  margin-left: 40px;
+}
+
+.dicImg {
+  display: block;
+  margin-left: 40px;
+}
+
+.ex {
+  color: #7f7f7f;
+}
+
+.opt {
+  color: #7f7f7f;
+}
+
+.sup {
+  vertical-align: super;
+  font-size: 7pt;
+}
+
+.article {
+  padding-bottom: 10px;
+  font-size: 10pt;
+  font-family: Segoe UI;
+}
+
+a, a:link, a:visited, a:focus, a:hover, a:active {
+  outline: none;
+  text-decoration: none;
+  color: #3366cc;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.hwd {
+  /*font-weight: bold;*/
+  margin-bottom: 5px;
+}
+
+.body-content a {
+  cursor: pointer;
+}
+
+.highlight {
+  color: white;
+  background: orange;
+}
+
+.p{
+  color: #2d8d17;
+  font-style: italic;
+}
+
+.sound {
+  background: url("assets/sound.png") no-repeat center center;
+  width: 16px; /*or your image's width*/
+  height: 16px; /*or your image's height*/
+  display: inline-block;
+  vertical-align: text-top;
+  cursor: pointer;
+  margin-left: 3px;
+}
+
+.dic-name {
+  font-size: 12px;
+  font-family: Arial;
+  border-style: solid;
+  border-color: #bdbdbd;
+  border-width: 1px;
+  padding: 3px;
+  background-color: #efefef;
+  float:right;
+  margin-right: 5px;
+}

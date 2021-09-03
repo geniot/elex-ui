@@ -1,0 +1,22 @@
+.dictionary-button {
+  border: 1px solid #c9c9c9;
+
+  border-radius: 5px;
+  padding: 3px;
+  margin-right: 3px;
+  vertical-align: middle;
+}
+
+.dictionary-link{
+  cursor: default;
+}
+
+.dictionary-button-selected {
+  border: 1px solid #000000;
+  background-color: orange;
+
+  border-radius: 5px;
+  padding: 3px;
+  margin-right: 3px;
+  vertical-align: middle;
+}

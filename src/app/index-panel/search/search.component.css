@@ -1,0 +1,15 @@
+.search-field-wrapper{
+  padding-top:10px;
+  padding-left: 10px;
+  padding-right: 12px;
+}
+.search-field {
+  border: 1px solid black;
+  height: 38px;
+  line-height: 38px;
+  display: block;
+  width: 100%;
+  padding: 0;
+  font-size: 1.4em;
+  text-indent: 8px;
+}

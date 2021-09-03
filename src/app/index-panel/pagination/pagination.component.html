@@ -1,0 +1,50 @@
+<div class="pagination">
+
+  <img title="To the start" class="pagination-button"
+       (click)="onToStartClick($event)"
+       [src]="startReached?srcDisabled1 : (src1 || srcOut1)"
+       (mousedown)="src1 = srcDown1"
+       (mouseup)="src1 = srcUp1"
+       (mouseover)="src1 = srcOn1"
+       (mouseout)="src1 = srcOut1">
+
+  <img title="Ten pages back" class="pagination-button"
+       (click)="onFastBackwardClick($event)"
+       [src]="startReached?srcDisabled2 : (src2 || srcOut2)"
+       (mousedown)="src2 = srcDown2"
+       (mouseup)="src2 = srcUp2"
+       (mouseover)="src2 = srcOn2"
+       (mouseout)="src2 = srcOut2">
+
+  <img title="Previous page" class="pagination-button"
+       (click)="onPageBackClick($event)"
+       [src]="startReached?srcDisabled3 : (src3 || srcOut3)"
+       (mousedown)="src3 = srcDown3"
+       (mouseup)="src3 = srcUp3"
+       (mouseover)="src3 = srcOn3"
+       (mouseout)="src3 = srcOut3">
+
+  <img title="Next page" class="pagination-button"
+       (click)="onPageForwardClick($event)"
+       [src]="endReached?srcDisabled4 : (src4 || srcOut4)"
+       (mousedown)="src4 = srcDown4"
+       (mouseup)="src4 = srcUp4"
+       (mouseover)="src4 = srcOn4"
+       (mouseout)="src4 = srcOut4">
+
+  <img title="Ten pages forward" class="pagination-button"
+       (click)="onFastForwardClick($event)"
+       [src]="endReached?srcDisabled5 : (src5 || srcOut5)"
+       (mousedown)="src5 = srcDown5"
+       (mouseup)="src5 = srcUp5"
+       (mouseover)="src5 = srcOn5"
+       (mouseout)="src5 = srcOut5">
+
+  <img title="To the end" class="pagination-button"
+       (click)="onToEndClick($event)"
+       [src]="endReached?srcDisabled6 : (src6 || srcOut6)"
+       (mousedown)="src6 = srcDown6"
+       (mouseup)="src6 = srcUp6"
+       (mouseover)="src6 = srcOn6"
+       (mouseout)="src6 = srcOut6">
+</div>

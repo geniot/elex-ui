@@ -1,0 +1,7 @@
+<select *ngIf="sourceLanguages().length>0" style="margin-left: 10px;text-transform: uppercase;" class="languageSelector" name="sourceLanguageSelector" [ngModel]="selectedSourceLanguageCode" (ngModelChange)="onChangeSource($event)">
+  <option *ngFor="let sourceLanguage of sourceLanguages()" value="{{sourceLanguage}}">{{sourceLanguage}}</option>
+</select>
+
+<select *ngIf="targetLanguages().length>0" style="margin-left: 5px; margin-right: 10px;text-transform: uppercase;" class="languageSelector" name="targetLanguageSelector" [ngModel]="selectedTargetLanguageCode" (ngModelChange)="onChangeTarget($event)">
+  <option *ngFor="let targetLanguage of targetLanguages()" value="{{targetLanguage}}">{{targetLanguage}}</option>
+</select>

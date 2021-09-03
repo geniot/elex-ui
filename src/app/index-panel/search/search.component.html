@@ -1,0 +1,9 @@
+<div class="search-field-wrapper">
+  <input [disabled]="this.disabled"
+         #searchInput
+         class="search-field"
+         (keydown.enter)="search($event)"
+         autofocus
+         type="text"
+  />
+</div>

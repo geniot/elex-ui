@@ -1,0 +1,14 @@
+<div class="table container">
+  <div class="table-row header">
+    <app-contents-toolbar class="ui-widget-header"></app-contents-toolbar>
+  </div>
+  <div class="table-row body">
+    <div class="table-cell body-content-outer-wrapper">
+      <div #container class="body-content-inner-wrapper">
+        <div class="body-content" (click)="search($event)" [innerHTML]="entryBody">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

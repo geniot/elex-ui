@@ -1,0 +1,17 @@
+.pagination{
+  white-space: nowrap;
+  margin-left: 5px;
+  margin-right: 5px;
+  height: 40px;
+}
+.pagination-button{
+}
+
+a.control-enabled {
+  cursor: pointer;
+}
+
+a.control-disabled {
+  pointer-events: none;
+  cursor: default;
+}

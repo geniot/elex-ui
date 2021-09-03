@@ -1,0 +1,54 @@
+.headword-wrapper {
+  padding: 0;
+}
+
+a.headword-link:link, a.headword-link:visited, a.headword-link:hover, a.headword-link:active {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.headword {
+  border: 0px solid lightgray;
+  height: 20px;
+  line-height: 20px;
+  display: block;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 1.4em;
+  text-indent: 8px;
+  color: black;
+  white-space: nowrap;
+  cursor: default;
+}
+
+
+.headword-selected {
+  background-color: orange;
+  color: white;
+}
+
+.example-viewport {
+  height: 100%;
+  width: 100%;
+  border: 0px solid black;
+  overflow-x: hidden;
+}
+
+.index-wrapper {
+  /*border: 1px solid;*/
+  border: 0;
+}
+
+.headword-item {
+  /*padding: 3px 6px 3px 6px;*/
+  padding: 0;
+}
+
+.even {
+  background-color: #ececec;
+}
+
+.odd {
+  background-color: #f5f5f5;
+}

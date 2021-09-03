@@ -1,0 +1,19 @@
+<as-split direction="horizontal" (dragEnd)="onDragEnd($event)">
+
+  <as-split-area *ngIf="config.columns[0].visible" [size]="config.columns[0].size">
+    <app-index-panel></app-index-panel>
+  </as-split-area>
+
+
+  <as-split-area *ngIf="config.columns[1].visible" [size]="config.columns[1].size">
+    <app-contents-panel></app-contents-panel>
+  </as-split-area>
+
+
+  <as-split-area *ngIf="config.columns[2].visible" [size]="config.columns[2].size">
+    <app-fulltext-panel></app-fulltext-panel>
+  </as-split-area>
+
+</as-split>
+
+

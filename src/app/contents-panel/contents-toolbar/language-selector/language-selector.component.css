@@ -1,0 +1,8 @@
+.languageSelector{
+  vertical-align: middle;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 3px;
+  border: none;
+}

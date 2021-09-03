@@ -1,0 +1,14 @@
+<div class="index-wrapper" >
+  <div  *ngFor="let headword of headwords;let index=index; let odd=odd; let even=even;"
+       [ngClass]="odd ? 'odd' : 'even'"
+  >
+
+      <div (wheel)="onMouseWheel($event)" (click)="onSelect(headword.name, index)"
+           [ngClass]="{  'headword':true,'headword-selected': headword.selected }">{{headword.name}}</div>
+
+  </div>
+</div>
+
+
+
+

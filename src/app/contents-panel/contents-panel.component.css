@@ -1,0 +1,6 @@
+.entry{
+  padding-top: 10px;
+  display: flex;
+  flex-flow: column;
+  flex: 0 1 auto;
+}

@@ -1,0 +1,43 @@
+<div class="table container">
+  <div class="table-row header">
+    <div *ngIf="searchResultsFor!=null && searchResultsFor.length>0 && searchResults.length>0;else elseBlock">
+      <div class="ui-widget-header">
+        <span style="padding-left: 10px">Full-text search results for:
+          <b>
+            <a (click)="onClick(searchResultsFor)" style="cursor: pointer;">{{searchResultsFor}}</a>
+          </b>
+        </span>
+        <img title="Lock results"
+             style="cursor: pointer; margin-left: auto;margin-right: 0"
+             (click)="onLockClick($event)"
+             [src]="lockFullText?'assets/lock.png' : 'assets/lock_open.png'"/>
+      </div>
+    </div>
+    <ng-template #elseBlock>
+      <div class="ui-widget-header"></div>
+    </ng-template>
+  </div>
+  <div class="table-row body">
+    <div class="table-cell body-content-outer-wrapper">
+      <div #container class="body-content-inner-wrapper">
+        <div class="body-content">
+          <div *ngFor="let fullTextHit of searchResults">
+            <span *ngFor="let dictionaryId of fullTextHit.dictionaryIds">
+              <img
+                style="height: 21px; width:14px; vertical-align: text-top;"
+                src="{{baseApiUrl}}/icon?id={{dictionaryId}}"
+                width="14" height="21"><span>&nbsp;</span>
+            </span>
+            <a (click)="onClick(fullTextHit.headword.name)" style="cursor:pointer;"><span
+              [innerHTML]="fullTextHit.headword.name"></span></a>
+            <span>&nbsp;</span>
+            <span *ngFor="let extract of fullTextHit.extracts; last as isLast">
+              <span [innerHTML]="extract"></span>
+              <span *ngIf="!isLast" style="color:red;padding-left: 5px; padding-right: 5px;">●</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
