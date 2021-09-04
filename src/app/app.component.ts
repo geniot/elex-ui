@@ -3,6 +3,7 @@ import {IOutputData} from "angular-split";
 import {cloneDeep} from 'lodash'
 import {InfoService} from "./info.service";
 import {LayoutConfig} from "./model/layoutconfig";
+import {Action} from "./model/action";
 
 
 @Component({
@@ -33,15 +34,13 @@ export class AppComponent {
         this.isScreenNarrow = this.infoService.isScreenNarrow();
       });
 
-    this.infoService.selectedHeadword.asObservable().subscribe(
-      hw => {
-        this.contentViewName = "article";
-      });
 
     this.infoService.model.asObservable().subscribe(
       model => {
         this.ftSearchResultsCount = model.searchResults.length;
-        if (model.exactMatch) {
+        if (model.action == Action.INDEX ||
+          model.action == Action.FT_LINK ||
+          (model.action == Action.SEARCH && model.exactMatch)) {
           this.contentViewName = "article";
         }
       });

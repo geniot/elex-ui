@@ -1,4 +1,5 @@
 export enum Action {
+  INIT = "INIT",
   INDEX = "INDEX",
   NEXT_WORD = "NEXT_WORD",
   NEXT_PAGE = "NEXT_PAGE",

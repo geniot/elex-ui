@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {InfoService} from "../../info.service";
 import {Headword} from "../../model/headword";
+import {Action} from "../../model/action";
 
 @Component({
   selector: 'app-index',
@@ -38,7 +39,8 @@ export class IndexComponent implements OnInit {
       }
     }
     this.infoService.model.value.selectedIndex = index;
-    this.infoService.model.value.userInputs[this.infoService.getSelectedSourceLanguage()] = null;
+    // this.infoService.model.value.userInputs[this.infoService.getSelectedSourceLanguage()] = null;
+    this.infoService.model.value.action = Action.INDEX;
     this.infoService.setSelectedHeadword(headword);
     this.infoService.updateModel();
   }
