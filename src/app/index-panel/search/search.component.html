@@ -3,7 +3,9 @@
          #searchInput
          class="search-field"
          (keydown.enter)="search($event)"
+         (focusout)="onFocusOutEvent($event)"
          autofocus
+         value="{{searchValue}}"
          type="text"
   />
 </div>

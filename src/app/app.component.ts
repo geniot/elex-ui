@@ -16,7 +16,9 @@ export class AppComponent {
   config: LayoutConfig = null;
   defaultConfig: LayoutConfig = new LayoutConfig();
   isScreenNarrow: boolean = false;
-  contentViewName:string = "index";
+  //narrow-view specific:
+  contentViewName: string = "index";
+  ftSearchResultsCount: number = 0;
 
   constructor(private infoService: InfoService) {
   }
@@ -34,6 +36,14 @@ export class AppComponent {
     this.infoService.selectedHeadword.asObservable().subscribe(
       hw => {
         this.contentViewName = "article";
+      });
+
+    this.infoService.model.asObservable().subscribe(
+      model => {
+        this.ftSearchResultsCount = model.searchResults.length;
+        if (model.exactMatch) {
+          this.contentViewName = "article";
+        }
       });
 
     if (localStorage.getItem(this.splitLayoutLocalStorageName)) {

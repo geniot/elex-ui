@@ -11,6 +11,7 @@ export class SearchComponent implements OnInit {
 
   disabled: boolean = false;
   @ViewChild('searchInput') searchElement: ElementRef;
+  searchValue:string = "";
 
   constructor(private infoService: InfoService) {
   }
@@ -19,6 +20,7 @@ export class SearchComponent implements OnInit {
     this.infoService.model.asObservable().subscribe(
       model => {
         this.disabled = model.headwords.length == 0;
+        this.searchValue = this.infoService.model.value.userInputs[this.infoService.getSelectedSourceLanguage()];
         setTimeout(()=>{ // this will make the execution after the above boolean has changed
           this.searchElement.nativeElement.focus();
         },0);
@@ -26,8 +28,15 @@ export class SearchComponent implements OnInit {
   }
 
   search($event: any) {
-    this.infoService.model.value.userInputs[this.infoService.getSelectedSourceLanguage()] = $event.target.value.trim();
+    // this.searchValue = $event.target.value;
+    this.searchValue = this.searchElement.nativeElement.value;
+    this.infoService.model.value.userInputs[this.infoService.getSelectedSourceLanguage()] = this.searchValue;
     this.infoService.model.value.action = Action.SEARCH;
     this.infoService.updateModel();
+  }
+
+  onFocusOutEvent($event: FocusEvent) {
+    this.searchValue = this.searchElement.nativeElement.value;
+    this.infoService.model.value.userInputs[this.infoService.getSelectedSourceLanguage()] = this.searchValue;
   }
 }

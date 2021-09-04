@@ -21,6 +21,7 @@ export class Model {
   visibleSize: number = 0;
   selectedIndex: number = 0;
   searchResultsFor: string;
+  exactMatch:boolean = false;
 
   action: Action = Action.INDEX;
   baseApiUrl:String;
