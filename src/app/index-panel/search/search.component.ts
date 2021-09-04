@@ -21,9 +21,11 @@ export class SearchComponent implements OnInit {
       model => {
         this.disabled = model.headwords.length == 0;
         this.searchValue = this.infoService.model.value.userInputs[this.infoService.getSelectedSourceLanguage()];
-        setTimeout(()=>{ // this will make the execution after the above boolean has changed
-          this.searchElement.nativeElement.focus();
-        },0);
+        if (!this.infoService.isScreenNarrow()){
+          setTimeout(()=>{ // this will make the execution after the above boolean has changed
+            this.searchElement.nativeElement.focus();
+          },0);
+        }
       });
   }
 
