@@ -34,6 +34,7 @@ export class InfoService {
     m.baseApiUrl = this.baseApiUrl;
     this.model.next(m);
     this.model.value.userInputs = new Map();
+    this.changeHeight.next(window.innerHeight);
 
     this.changeHeight
       .asObservable()
@@ -73,7 +74,7 @@ export class InfoService {
     if (this.isScreenNarrow()) {
       extras += 35;
     }
-    return Math.floor((Number(window.innerHeight) - extras) / 30);
+    return Math.floor((Number(this.changeHeight.value) - extras) / 30);
   }
 
   public setSelectedHeadword(hw: string): void {
