@@ -1,2 +1,13 @@
+.navLink {
+  cursor: pointer;
+  color: black;
+  padding:3px;
+}
 
+.navLink-selected {
+  cursor: pointer;
+  background-color: orange;
+  color: white;
+  padding:3px;
+}
 

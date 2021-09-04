@@ -16,6 +16,7 @@ export class AppComponent {
   config: LayoutConfig = null;
   defaultConfig: LayoutConfig = new LayoutConfig();
   isScreenNarrow: boolean = false;
+  contentViewName:string = "index";
 
   constructor(private infoService: InfoService) {
   }
@@ -27,7 +28,12 @@ export class AppComponent {
      */
     this.infoService.changeWidth.asObservable().subscribe(
       width => {
-        this.isScreenNarrow = width <= 767;
+        this.isScreenNarrow = this.infoService.isScreenNarrow();
+      });
+
+    this.infoService.selectedHeadword.asObservable().subscribe(
+      hw => {
+        this.contentViewName = "article";
       });
 
     if (localStorage.getItem(this.splitLayoutLocalStorageName)) {
@@ -35,6 +41,7 @@ export class AppComponent {
     } else {
       this.resetConfig()
     }
+    window.dispatchEvent(new Event('resize'));
     this.infoService.updateModel();
   }
 

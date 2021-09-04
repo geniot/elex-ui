@@ -17,13 +17,17 @@ export class InfoService {
   public cssUrl = this.baseApiUrl + '/css';
 
   model: BehaviorSubject<Model> = new BehaviorSubject(new Model());
-  changeHeight = new Subject();
-  changeWidth = new Subject();
+  changeHeight: BehaviorSubject<Number> = new BehaviorSubject(0);
+  changeWidth: BehaviorSubject<Number> = new BehaviorSubject(0);
+  /**
+   * To switch view from index to article in narrow screen we keep track of the changed selected headword
+   */
+  selectedHeadword: BehaviorSubject<String> = new BehaviorSubject(null);
   mouseWheelChangeValue = new Subject();
 
   constructor(public http: HttpClient) {
     let m: Model = new Model();
-    m.selectedIndex = Math.round(this.visibleIndexSize()/2);
+    m.selectedIndex = Math.round(this.visibleIndexSize() / 2);
     if (localStorage.getItem(this.modelLocalStorageName)) {
       m = JSON.parse(localStorage.getItem(this.modelLocalStorageName));
     }
@@ -65,10 +69,15 @@ export class InfoService {
   }
 
   visibleIndexSize(): number {
-    return Math.floor((Number(window.innerHeight) - 70 - 25) / 30);
+    let extras: number = 95;
+    if (this.isScreenNarrow()) {
+      extras += 35;
+    }
+    return Math.floor((Number(window.innerHeight) - extras) / 30);
   }
 
   public setSelectedHeadword(hw: string): void {
+    this.selectedHeadword.next(hw);
     let key = this.getSelectedSourceLanguage();// + "-" + this.getSelectedTargetLanguage();
     this.model.value.selectedHeadwords[key] = hw;
   }
@@ -111,5 +120,9 @@ export class InfoService {
       this.model.value.action = Action.PREVIOUS_PAGE;
       this.updateModel();
     }
+  }
+
+  isScreenNarrow(): boolean {
+    return this.changeWidth.value <= 767;
   }
 }

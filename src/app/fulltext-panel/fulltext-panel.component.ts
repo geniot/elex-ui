@@ -34,6 +34,7 @@ export class FulltextPanelComponent implements OnInit {
   onClick(text: string) {
     this.infoService.model.value.ftLink = text;
     this.infoService.model.value.action = Action.FT_LINK;
+    this.infoService.selectedHeadword.next(text);
     this.infoService.updateModel();
   }
 

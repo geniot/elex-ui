@@ -1,15 +1,28 @@
 <ng-template [ngIf]="isScreenNarrow" [ngIfElse]="isScreenWide">
-  <p-accordion>
-    <p-accordionTab header="Index">
-      <app-index-panel></app-index-panel>
-    </p-accordionTab>
-    <p-accordionTab header="Content">
-      <app-contents-panel></app-contents-panel>
-    </p-accordionTab>
-    <p-accordionTab header="Full-text">
-      <app-fulltext-panel></app-fulltext-panel>
-    </p-accordionTab>
-  </p-accordion>
+  <div class="table container">
+    <div style="display: flex; justify-content: space-evenly;padding-top:10px;" class="table-row header">
+      <span (click)="this.contentViewName='index'"
+            [ngClass]="{  'navLink':true,'navLink-selected': this.contentViewName=='index' }"
+      >Index</span>
+      <span (click)="this.contentViewName='article'"
+            [ngClass]="{  'navLink':true,'navLink-selected': this.contentViewName=='article' }"
+      >Article</span>
+      <span (click)="this.contentViewName='ft'"
+            [ngClass]="{  'navLink':true,'navLink-selected': this.contentViewName=='ft' }"
+      >Full-Text</span>
+    </div>
+    <div class="table-row body">
+      <div style="padding: 0" class="table-cell body-content-outer-wrapper">
+        <div [ngSwitch]="this.contentViewName" style="overflow: hidden;" class="body-content-inner-wrapper">
+          <app-index-panel *ngSwitchCase="'index'"></app-index-panel>
+          <app-contents-panel *ngSwitchCase="'article'"></app-contents-panel>
+          <app-fulltext-panel *ngSwitchCase="'ft'"></app-fulltext-panel>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </ng-template>
 
 <ng-template #isScreenWide>
