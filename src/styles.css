@@ -79,6 +79,7 @@ body {
 
 .body-content {
   padding-top: 1px;
+  padding-right: 10px;
   position: absolute;
   top: 0;
   bottom: 0;
