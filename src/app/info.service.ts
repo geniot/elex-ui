@@ -26,6 +26,8 @@ export class InfoService {
   mouseWheelChangeValue = new Subject();
 
   constructor(public http: HttpClient) {
+    this.changeHeight.next(window.innerHeight);
+
     let m: Model = new Model();
     m.selectedIndex = Math.round(this.visibleIndexSize() / 2);
     if (localStorage.getItem(this.modelLocalStorageName)) {
@@ -34,7 +36,7 @@ export class InfoService {
     m.baseApiUrl = this.baseApiUrl;
     this.model.next(m);
     this.model.value.userInputs = new Map();
-    this.changeHeight.next(window.innerHeight);
+
 
     this.changeHeight
       .asObservable()
