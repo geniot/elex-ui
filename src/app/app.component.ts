@@ -72,7 +72,9 @@ export class AppComponent {
 
   @HostListener('window:resize', ['$event.target'])
   public onResize(target) {
-    this.infoService.changeHeight.next(target.innerHeight);
+    if (!this.infoService.isScreenNarrow()) {
+      this.infoService.changeHeight.next(target.innerHeight);
+    }
     this.infoService.changeWidth.next(target.innerWidth);
   }
 }
