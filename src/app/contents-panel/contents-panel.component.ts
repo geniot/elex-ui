@@ -61,8 +61,8 @@ export class ContentsPanelComponent implements OnInit {
         audio.load();
         audio.play();
       } else {
-        this.infoService.model.value.userInputs[this.infoService.getSelectedSourceLanguage()] = dataLink;
-        this.infoService.model.value.action = Action.SEARCH;
+        this.infoService.model.value.ftLink = dataLink;
+        this.infoService.model.value.action = Action.FT_LINK;
         this.infoService.updateModel();
       }
     }

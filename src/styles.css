@@ -135,6 +135,11 @@ body {
   font-size: 7pt;
 }
 
+.sub {
+  vertical-align: sub;
+  font-size: 10pt;
+}
+
 .article {
   padding-bottom: 10px;
   font-size: 10pt;
