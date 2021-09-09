@@ -62,7 +62,7 @@ export class ContentsPanelComponent implements OnInit {
         audio.play();
       } else {
         this.infoService.model.value.ftLink = dataLink;
-        this.infoService.model.value.action = Action.FT_LINK;
+        this.infoService.model.value.action = Action.CONTENT_LINK;
         this.infoService.updateModel();
       }
     }
