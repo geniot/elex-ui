@@ -13,7 +13,6 @@ export class Model {
   searchResults: FullTextHit[] = [];
   startReached: boolean = false;
   endReached: boolean = false;
-  lockFullText: boolean = false;
 
   selectedHeadwords: Map<string, string> = new Map();
   userInputs: Map<string, string> = new Map();

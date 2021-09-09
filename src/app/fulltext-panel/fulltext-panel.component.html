@@ -7,10 +7,6 @@
             <a (click)="onClick(searchResultsFor)" style="cursor: pointer;">{{searchResultsFor}}</a>
           </b>
         </span>
-        <img title="Lock results"
-             style="cursor: pointer; margin-left: auto;margin-right: 0"
-             (click)="onLockClick($event)"
-             [src]="lockFullText?'assets/lock.png' : 'assets/lock_open.png'"/>
       </div>
     </div>
     <ng-template #elseBlock>

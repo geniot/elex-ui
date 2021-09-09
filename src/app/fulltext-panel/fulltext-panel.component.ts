@@ -13,7 +13,6 @@ export class FulltextPanelComponent implements OnInit {
   baseApiUrl = environment.BASE_API_URL;
   searchResults: FullTextHit[];
   searchResultsFor: string;
-  lockFullText: boolean;
   @ViewChild('container') myDiv: ElementRef;
 
   constructor(private infoService: InfoService) {
@@ -27,7 +26,6 @@ export class FulltextPanelComponent implements OnInit {
         }
         this.searchResultsFor = model.searchResultsFor;
         this.searchResults = model.searchResults;
-        this.lockFullText = model.lockFullText;
       });
   }
 
@@ -36,11 +34,5 @@ export class FulltextPanelComponent implements OnInit {
     this.infoService.model.value.action = Action.FT_LINK;
     this.infoService.selectedHeadword.next(text);
     this.infoService.updateModel();
-  }
-
-  onLockClick($event: MouseEvent) {
-    this.lockFullText = !this.lockFullText;
-    this.infoService.model.value.lockFullText = this.lockFullText;
-    this.infoService.saveState();
   }
 }
