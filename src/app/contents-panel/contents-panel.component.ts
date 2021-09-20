@@ -67,6 +67,7 @@ export class ContentsPanelComponent implements OnInit {
       if (dataId != null && dataLink.endsWith(".wav")) {
         let audio = new Audio();
         audio.src = this.baseApiUrl + "/wav?id=" + dataId + "&link=" + dataLink;
+        audio.crossOrigin = 'anonymous';
         audio.load();
         audio.play();
       } else {
