@@ -52,7 +52,14 @@ export class ContentsPanelComponent implements OnInit {
     let dataId: String = event.target.getAttribute('data-id');
     let dataLink: String = event.target.getAttribute('data-link');
     if (dataLink == null) {
-      dataLink = event.target.parentNode.getAttribute('data-link');
+      let parentNode = event.target.parentNode;
+      while (parentNode != null) {
+        dataLink = parentNode.getAttribute('data-link');
+        if (dataLink != null) {
+          break;
+        }
+        parentNode = parentNode.parentNode;
+      }
     }
     if (dataLink != null) {
       if (dataId != null && dataLink.endsWith(".wav")) {
