@@ -54,9 +54,11 @@ export class ContentsPanelComponent implements OnInit {
     if (dataLink == null) {
       let parentNode = event.target.parentNode;
       while (parentNode != null) {
-        dataLink = parentNode.getAttribute('data-link');
-        if (dataLink != null) {
-          break;
+        if (typeof parentNode.getAttribute === "function") {
+          dataLink = parentNode.getAttribute('data-link');
+          if (dataLink != null) {
+            break;
+          }
         }
         parentNode = parentNode.parentNode;
       }

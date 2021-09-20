@@ -146,6 +146,10 @@ body {
   font-family: Segoe UI;
 }
 
+.stress{
+  text-decoration: underline;
+}
+
 a, a:link, a:visited, a:focus, a:hover, a:active {
   outline: none;
   text-decoration: none;
