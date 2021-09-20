@@ -25,7 +25,7 @@
                 width="14" height="21"><span>&nbsp;</span>
             </span>
             <a (click)="onClick(fullTextHit.headword.name)" style="cursor:pointer;"><span
-              [innerHTML]="fullTextHit.headword.name"></span></a>
+              [innerHTML]="fullTextHit.headword.nameHighlighted"></span></a>
             <span>&nbsp;</span>
             <span *ngFor="let extract of fullTextHit.extracts; last as isLast">
               <span [innerHTML]="extract"></span>
