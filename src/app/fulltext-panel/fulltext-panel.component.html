@@ -22,6 +22,7 @@
               <img
                 style="height: 21px; width:14px; vertical-align: text-top;"
                 src="{{baseApiUrl}}/icon?id={{dictionaryId}}"
+                title="{{getDictionaryNameById(dictionaryId)}}"
                 width="14" height="21"><span>&nbsp;</span>
             </span>
             <a (click)="onClick(fullTextHit.headword.name)" style="cursor:pointer;"><span

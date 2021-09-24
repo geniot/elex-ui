@@ -128,4 +128,13 @@ export class InfoService {
   isScreenNarrow(): boolean {
     return this.changeWidth.value <= 767;
   }
+
+  getDictionaryNameById(dictionaryId: number) {
+    for (let dictionary of this.model.value.dictionaries){
+      if (dictionary.id==dictionaryId){
+        return dictionary.name;
+      }
+    }
+    return "";
+  }
 }

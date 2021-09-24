@@ -35,4 +35,8 @@ export class FulltextPanelComponent implements OnInit {
     this.infoService.selectedHeadword.next(text);
     this.infoService.updateModel();
   }
+
+  getDictionaryNameById(dictionaryId: number) {
+    return this.infoService.getDictionaryNameById(dictionaryId);
+  }
 }
