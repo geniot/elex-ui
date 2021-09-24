@@ -19,7 +19,7 @@ export class FulltextPanelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.infoService.model.asObservable().subscribe(
+    this.infoService.ftModel.asObservable().subscribe(
       model => {
         if (this.myDiv != null && this.searchResultsFor != model.searchResultsFor) {
           this.myDiv.nativeElement.scrollTop = 0;

@@ -18,6 +18,7 @@ export class InfoService {
   public cssUrl = this.baseApiUrl + '/css';
 
   model: BehaviorSubject<Model> = new BehaviorSubject(new Model());
+  ftModel: BehaviorSubject<Model> = new BehaviorSubject(new Model());
   changeHeight: BehaviorSubject<Number> = new BehaviorSubject(0);
   changeWidth: BehaviorSubject<Number> = new BehaviorSubject(0);
   /**
@@ -75,7 +76,7 @@ export class InfoService {
         this.model.value.searchResultsFor = model.searchResultsFor;
         this.model.value.searchResults = model.searchResults;
         localStorage.setItem(this.modelLocalStorageName, JSON.stringify(this.model.value));
-        this.model.next(this.model.value);
+        this.ftModel.next(model);
       });
     }
   }
