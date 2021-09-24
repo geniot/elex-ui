@@ -37,12 +37,16 @@ export class AppComponent {
 
     this.infoService.model.asObservable().subscribe(
       model => {
-        this.ftSearchResultsCount = model.searchResults.length;
         if (model.action == Action.INDEX ||
           model.action == Action.FT_LINK ||
           (model.action == Action.SEARCH && model.exactMatch)) {
           this.contentViewName = "article";
         }
+      });
+
+    this.infoService.ftModel.asObservable().subscribe(
+      ftModel => {
+        this.ftSearchResultsCount = ftModel.searchResults.length;
       });
 
     if (localStorage.getItem(this.splitLayoutLocalStorageName)) {

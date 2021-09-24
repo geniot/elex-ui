@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {debounceTime, throttleTime} from "rxjs/operators";
 import {Action} from "./model/action";
 import {environment} from "../environments/environment";
+import {FtModel} from "./model/ftmodel";
 
 
 @Injectable({providedIn: 'root'})
@@ -18,7 +19,7 @@ export class InfoService {
   public cssUrl = this.baseApiUrl + '/css';
 
   model: BehaviorSubject<Model> = new BehaviorSubject(new Model());
-  ftModel: BehaviorSubject<Model> = new BehaviorSubject(new Model());
+  ftModel: BehaviorSubject<FtModel> = new BehaviorSubject(new FtModel());
   changeHeight: BehaviorSubject<Number> = new BehaviorSubject(0);
   changeWidth: BehaviorSubject<Number> = new BehaviorSubject(0);
   /**
@@ -72,11 +73,10 @@ export class InfoService {
       this.model.next(model);
     });
     if (this.model.value.action != Action.FT_LINK) {
-      this.http.post<Model>(this.ftUrl, JSON.stringify(this.model.value)).subscribe(model => {
-        this.model.value.searchResultsFor = model.searchResultsFor;
-        this.model.value.searchResults = model.searchResults;
+      this.http.post<FtModel>(this.ftUrl, JSON.stringify(this.model.value)).subscribe(ftModel => {
+        this.model.value.searchResultsFor = ftModel.searchResultsFor;
         localStorage.setItem(this.modelLocalStorageName, JSON.stringify(this.model.value));
-        this.ftModel.next(model);
+        this.ftModel.next(ftModel);
       });
     }
   }

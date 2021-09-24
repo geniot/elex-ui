@@ -10,7 +10,6 @@ export class Model {
   dictionaries: Dictionary[] = [];
   headwords: Headword[] = [];
   entries: Entry[] = [];
-  searchResults: FullTextHit[] = [];
   startReached: boolean = false;
   endReached: boolean = false;
 
