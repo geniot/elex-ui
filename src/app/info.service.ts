@@ -14,6 +14,7 @@ export class InfoService {
 
   modelLocalStorageName = 'elex-modelLocalStorageName';
   private dataUrl = this.baseApiUrl + '/data';
+  private ftUrl = this.baseApiUrl + '/ft';
   public cssUrl = this.baseApiUrl + '/css';
 
   model: BehaviorSubject<Model> = new BehaviorSubject(new Model());
@@ -69,6 +70,14 @@ export class InfoService {
       localStorage.setItem(this.modelLocalStorageName, JSON.stringify(model));
       this.model.next(model);
     });
+    if (this.model.value.action != Action.FT_LINK) {
+      this.http.post<Model>(this.ftUrl, JSON.stringify(this.model.value)).subscribe(model => {
+        this.model.value.searchResultsFor = model.searchResultsFor;
+        this.model.value.searchResults = model.searchResults;
+        localStorage.setItem(this.modelLocalStorageName, JSON.stringify(this.model.value));
+        this.model.next(this.model.value);
+      });
+    }
   }
 
   visibleIndexSize(): number {
@@ -130,8 +139,8 @@ export class InfoService {
   }
 
   getDictionaryNameById(dictionaryId: number) {
-    for (let dictionary of this.model.value.dictionaries){
-      if (dictionary.id==dictionaryId){
+    for (let dictionary of this.model.value.dictionaries) {
+      if (dictionary.id == dictionaryId) {
         return dictionary.name;
       }
     }
