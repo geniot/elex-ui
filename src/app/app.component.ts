@@ -21,6 +21,9 @@ export class AppComponent {
   contentViewName: string = "index";
   ftSearchResultsCount: number = 0;
 
+  displayAbout: boolean = false;
+  aboutText: string;
+
   constructor(private infoService: InfoService) {
   }
 
@@ -30,7 +33,7 @@ export class AppComponent {
      * Low Resolution Tablets and ipads max-width: 767px
      */
     this.infoService.changeWidth.asObservable().subscribe(
-      width => {
+      () => {
         this.isScreenNarrow = this.infoService.isScreenNarrow();
       });
 
@@ -47,6 +50,14 @@ export class AppComponent {
     this.infoService.ftModel.asObservable().subscribe(
       ftModel => {
         this.ftSearchResultsCount = ftModel.searchResults.length;
+      });
+
+    this.infoService.aboutModel.asObservable().subscribe(
+      aboutModel => {
+        if (Object.keys(aboutModel.abouts).length > 0) {
+          this.displayAbout = true;
+          this.aboutText = Object.values(aboutModel.abouts)[0];
+        }
       });
 
     if (localStorage.getItem(this.splitLayoutLocalStorageName)) {

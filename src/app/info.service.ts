@@ -3,10 +3,12 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {Model} from "./model/model";
 import {HttpClient} from "@angular/common/http";
-import {debounceTime, throttleTime} from "rxjs/operators";
+import {debounceTime} from "rxjs/operators";
 import {Action} from "./model/action";
 import {environment} from "../environments/environment";
 import {FtModel} from "./model/ftmodel";
+import {Dictionary} from "./model/dictionary";
+import {AboutModel} from "./model/aboutmodel";
 
 
 @Injectable({providedIn: 'root'})
@@ -15,11 +17,13 @@ export class InfoService {
 
   modelLocalStorageName = 'elex-modelLocalStorageName';
   private dataUrl = this.baseApiUrl + '/data';
+  private aboutUrl = this.baseApiUrl + '/about';
   private ftUrl = this.baseApiUrl + '/ft';
   public cssUrl = this.baseApiUrl + '/css';
 
   model: BehaviorSubject<Model> = new BehaviorSubject(new Model());
   ftModel: BehaviorSubject<FtModel> = new BehaviorSubject(new FtModel());
+  aboutModel: BehaviorSubject<AboutModel> = new BehaviorSubject(new AboutModel());
   changeHeight: BehaviorSubject<Number> = new BehaviorSubject(0);
   changeWidth: BehaviorSubject<Number> = new BehaviorSubject(0);
   /**
@@ -44,7 +48,7 @@ export class InfoService {
     this.changeHeight
       .asObservable()
       .pipe(debounceTime(100))
-      .subscribe(innerHeight => {
+      .subscribe(() => {
         let visibleIndexSize = this.visibleIndexSize();
         if (visibleIndexSize != this.model.value.visibleSize) {
           this.updateModel();
@@ -146,5 +150,13 @@ export class InfoService {
       }
     }
     return "";
+  }
+
+  public onAbout(dictionary: Dictionary): void {
+    this.aboutModel.value.dictionary = dictionary;
+    this.aboutModel.value.abouts = new Map();
+    this.http.post<AboutModel>(this.aboutUrl, JSON.stringify(this.aboutModel.value)).subscribe(model => {
+      this.aboutModel.next(model);
+    });
   }
 }

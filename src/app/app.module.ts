@@ -19,6 +19,8 @@ import {InfoService} from "./info.service";
 import { IndexComponent } from './index-panel/index/index.component';
 import { SearchComponent } from './index-panel/search/search.component';
 import {PaginationComponent} from "./index-panel/pagination/pagination.component";
+import {ContextMenuModule} from "primeng/contextmenu";
+import {DialogModule} from 'primeng/dialog';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import {PaginationComponent} from "./index-panel/pagination/pagination.component
     AngularSplitModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ContextMenuModule,
+    DialogModule
   ],
   providers: [InfoService],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import {Dictionary} from "../../../model/dictionary";
 import {environment} from "../../../../environments/environment";
 import {InfoService} from "../../../info.service";
 import {HttpParams} from "@angular/common/http";
+import {MenuItem} from "primeng/api";
 
 @Component({
   selector: 'app-dictionary-button',
@@ -11,6 +12,7 @@ import {HttpParams} from "@angular/common/http";
 })
 export class DictionaryButtonComponent implements OnInit {
   baseApiUrl = environment.BASE_API_URL;
+  items: MenuItem[];
 
   @Input() dictionary: Dictionary;
 
@@ -19,9 +21,37 @@ export class DictionaryButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateCSS();
+    this.items = [
+      {
+        label: 'About Dictionary',
+        command: () => {
+          this.infoService.onAbout(this.dictionary);
+        }
+        // items: [{
+        //   label: 'New',
+        //   icon: 'pi pi-fw pi-plus',
+        //   items: [
+        //     {label: 'Project'},
+        //     {label: 'Other'},
+        //   ]
+        // },
+        //   {label: 'Open'},
+        //   {label: 'Quit'}
+        // ]
+      },
+      // {
+      //   label: 'Edit',
+      //   icon: 'pi pi-fw pi-pencil',
+      //   items: [
+      //     {label: 'Delete', icon: 'pi pi-fw pi-trash'},
+      //     {label: 'Refresh', icon: 'pi pi-fw pi-refresh'}
+      //   ]
+      // }
+    ];
   }
 
-  onClick($event: MouseEvent) {
+
+  onClick() {
     this.dictionary.selected = !this.dictionary.selected;
     this.updateCSS();
     this.infoService.updateModel();
