@@ -90,7 +90,7 @@ export class InfoService {
     if (this.isScreenNarrow()) {
       extras += 35;
     }
-    return Math.floor((Number(this.changeHeight.value) - extras) / 30);
+    return Math.floor((Number(this.changeHeight.value) - extras) / 35);
   }
 
   public setSelectedHeadword(hw: string): void {
