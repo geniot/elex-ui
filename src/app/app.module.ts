@@ -21,6 +21,10 @@ import { SearchComponent } from './index-panel/search/search.component';
 import {PaginationComponent} from "./index-panel/pagination/pagination.component";
 import {ContextMenuModule} from "primeng/contextmenu";
 import {DialogModule} from 'primeng/dialog';
+import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
+import { AboutDialogComponent } from './about-dialog/about-dialog.component';
+import {TabMenuModule} from "primeng/tabmenu";
+import {TabViewModule} from 'primeng/tabview';
 
 
 @NgModule({
@@ -34,7 +38,8 @@ import {DialogModule} from 'primeng/dialog';
     DictionaryButtonComponent,
     IndexComponent,
     SearchComponent,
-    PaginationComponent
+    PaginationComponent,
+    AboutDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -43,9 +48,12 @@ import {DialogModule} from 'primeng/dialog';
     HttpClientModule,
     FormsModule,
     ContextMenuModule,
-    DialogModule
+    DialogModule,
+    DynamicDialogModule,
+    TabMenuModule,
+    TabViewModule
   ],
-  providers: [InfoService],
+  providers: [InfoService, DialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

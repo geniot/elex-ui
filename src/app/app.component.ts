@@ -4,6 +4,9 @@ import {cloneDeep} from 'lodash'
 import {InfoService} from "./info.service";
 import {LayoutConfig} from "./model/layoutconfig";
 import {Action} from "./model/action";
+import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
+import {DialogService} from "primeng/dynamicdialog";
+import {AboutDialogComponent} from "./about-dialog/about-dialog.component";
 
 
 @Component({
@@ -22,9 +25,8 @@ export class AppComponent {
   ftSearchResultsCount: number = 0;
 
   displayAbout: boolean = false;
-  aboutText: string;
 
-  constructor(private infoService: InfoService) {
+  constructor(private infoService: InfoService,public dialogService: DialogService) {
   }
 
   ngOnInit() {
@@ -55,8 +57,13 @@ export class AppComponent {
     this.infoService.aboutModel.asObservable().subscribe(
       aboutModel => {
         if (Object.keys(aboutModel.abouts).length > 0) {
-          this.displayAbout = true;
-          this.aboutText = Object.values(aboutModel.abouts)[0];
+          this.dialogService.open(AboutDialogComponent, {
+            data: {
+              aboutModel: aboutModel
+            },
+            header: aboutModel.dictionary.name,
+            width: '70%'
+          });
         }
       });
 
