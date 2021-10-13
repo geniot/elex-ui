@@ -5,4 +5,8 @@
   appearance: none;
   padding: 3px;
   border: none;
+  width:25px;
+  margin-left: 5px;
+  text-transform: uppercase;
+  text-align:center;
 }
