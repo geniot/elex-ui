@@ -1,5 +1,10 @@
 export class LayoutConfig {
-  columns: Column[] = [new Column(true, 25), new Column(true, 50), new Column(true, 25)];
+  columns: Column[] = [
+    new Column(true, 25),
+    new Column(true, 40),
+    new Column(true, 25),
+    new Column(true, 10)
+  ];
 }
 
 class Column {

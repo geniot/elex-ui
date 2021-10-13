@@ -26,6 +26,7 @@ export class InfoService {
   aboutModel: BehaviorSubject<AboutModel> = new BehaviorSubject(new AboutModel());
   changeHeight: BehaviorSubject<Number> = new BehaviorSubject(0);
   changeWidth: BehaviorSubject<Number> = new BehaviorSubject(0);
+  changeView: BehaviorSubject<Number> = new BehaviorSubject(3);
   /**
    * To switch view from index to article in narrow screen we keep track of the changed selected headword
    */
@@ -76,7 +77,8 @@ export class InfoService {
       localStorage.setItem(this.modelLocalStorageName, JSON.stringify(model));
       this.model.next(model);
     });
-    if (this.model.value.action != Action.FT_LINK) {
+    // ft request
+    if (this.model.value.action != Action.FT_LINK && this.changeView.value > 2) {
       this.http.post<FtModel>(this.ftUrl, JSON.stringify(this.model.value)).subscribe(ftModel => {
         this.model.value.searchResultsFor = ftModel.searchResultsFor;
         localStorage.setItem(this.modelLocalStorageName, JSON.stringify(this.model.value));

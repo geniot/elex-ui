@@ -9,6 +9,8 @@ import {InfoService} from "../../info.service";
 })
 export class ContentsToolbarComponent implements OnInit {
   dictionaries: Dictionary[];
+  columns: Number = 3;
+  isScreenNarrow: boolean = false;
 
   constructor(private infoService: InfoService) {
   }
@@ -18,6 +20,20 @@ export class ContentsToolbarComponent implements OnInit {
       model => {
         this.dictionaries = model.dictionaries;
       });
+    this.infoService.changeView.asObservable().subscribe(
+      columns => {
+        this.columns = columns;
+      });
+    this.infoService.changeWidth.asObservable().subscribe(
+      () => {
+        this.isScreenNarrow = this.infoService.isScreenNarrow();
+      });
+  }
+
+  onChangeView(n: Number) {
+    if (n != this.columns) {
+      this.infoService.changeView.next(n);
+    }
   }
 
 }

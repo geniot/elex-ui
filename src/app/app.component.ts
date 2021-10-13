@@ -24,9 +24,7 @@ export class AppComponent {
   contentViewName: string = "index";
   ftSearchResultsCount: number = 0;
 
-  displayAbout: boolean = false;
-
-  constructor(private infoService: InfoService,public dialogService: DialogService) {
+  constructor(private infoService: InfoService, public dialogService: DialogService) {
   }
 
   ngOnInit() {
@@ -67,25 +65,50 @@ export class AppComponent {
         }
       });
 
+    this.infoService.changeView.asObservable().subscribe(
+      columns => {
+        if (this.config != null) {
+          for (let i = 0; i < this.config.columns.length; i++) {
+            if (i < columns.valueOf()) {
+              this.config.columns[i].visible = true;
+            } else {
+              this.config.columns[i].visible = false;
+            }
+          }
+          this.saveLocalStorage();
+        }
+      });
+
     if (localStorage.getItem(this.splitLayoutLocalStorageName)) {
-      this.config = JSON.parse(localStorage.getItem(this.splitLayoutLocalStorageName))
+      this.config = JSON.parse(localStorage.getItem(this.splitLayoutLocalStorageName));
+      //in rare cases we may want to add/remove columns and we need to stay in sync
+      if (this.config.columns.length != this.defaultConfig.columns.length) {
+        this.resetConfig();
+      }
     } else {
-      this.resetConfig()
+      this.resetConfig();
     }
+
+    let visibleViews: number = 0;
+    for (let i = 0; i < this.config.columns.length; i++) {
+      visibleViews += this.config.columns[i].visible ? 1 : 0;
+    }
+    this.infoService.changeView.next(visibleViews);
+
     window.dispatchEvent(new Event('resize'));
     this.infoService.updateModel();
   }
 
-  resetConfig() {
-    this.config = cloneDeep(this.defaultConfig)
-    localStorage.removeItem(this.splitLayoutLocalStorageName)
+  resetConfig(): void {
+    this.config = cloneDeep(this.defaultConfig);
+    localStorage.removeItem(this.splitLayoutLocalStorageName);
   }
 
   onDragEnd(e: IOutputData) {
-    this.config.columns[0].size = e.sizes[0] as number;
-    this.config.columns[1].size = e.sizes[1] as number;
-    this.config.columns[2].size = e.sizes[2] as number;
-    this.saveLocalStorage()
+    for (let i = 0; i < e.sizes.length; i++) {
+      this.config.columns[i].size = e.sizes[i] as number;
+    }
+    this.saveLocalStorage();
   }
 
   saveLocalStorage() {

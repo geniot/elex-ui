@@ -25,6 +25,7 @@ import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import {TabMenuModule} from "primeng/tabmenu";
 import {TabViewModule} from 'primeng/tabview';
+import {HistoryPanelComponent} from "./history-panel/history-panel.component";
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {TabViewModule} from 'primeng/tabview';
     IndexComponent,
     SearchComponent,
     PaginationComponent,
-    AboutDialogComponent
+    AboutDialogComponent,
+    HistoryPanelComponent
   ],
   imports: [
     BrowserModule,

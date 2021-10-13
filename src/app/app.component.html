@@ -10,6 +10,9 @@
       <span (click)="this.contentViewName='ft'"
             [ngClass]="{  'navLink':true,'navLink-selected': this.contentViewName=='ft' }"
       >Full-Text ({{ftSearchResultsCount}})</span>
+      <span (click)="this.contentViewName='history'"
+            [ngClass]="{  'navLink':true,'navLink-selected': this.contentViewName=='history' }"
+      >History</span>
     </div>
     <div class="table-row body">
       <div style="padding: 0" class="table-cell body-content-outer-wrapper">
@@ -17,6 +20,7 @@
           <app-index-panel *ngSwitchCase="'index'"></app-index-panel>
           <app-contents-panel *ngSwitchCase="'article'"></app-contents-panel>
           <app-fulltext-panel *ngSwitchCase="'ft'"></app-fulltext-panel>
+          <app-history-panel *ngSwitchCase="'history'"></app-history-panel>
         </div>
       </div>
     </div>
@@ -40,6 +44,10 @@
 
     <as-split-area *ngIf="config.columns[2].visible" [size]="config.columns[2].size">
       <app-fulltext-panel></app-fulltext-panel>
+    </as-split-area>
+
+    <as-split-area *ngIf="config.columns[3].visible" [size]="config.columns[3].size">
+      <app-history-panel></app-history-panel>
     </as-split-area>
 
   </as-split>
