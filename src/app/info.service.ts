@@ -40,6 +40,7 @@ export class InfoService {
     m.selectedIndex = Math.round(this.visibleIndexSize() / 2);
     if (localStorage.getItem(this.modelLocalStorageName)) {
       m = JSON.parse(localStorage.getItem(this.modelLocalStorageName));
+      m.action = Action.INIT;
     }
     m.baseApiUrl = this.baseApiUrl;
     this.model.next(m);
