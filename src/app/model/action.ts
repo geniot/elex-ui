@@ -1,6 +1,7 @@
 export enum Action {
   INIT = "INIT",
   INDEX = "INDEX",
+  HISTORY_LINK = "HISTORY_LINK",
   NEXT_WORD = "NEXT_WORD",
   NEXT_PAGE = "NEXT_PAGE",
   NEXT_TEN_PAGES = "NEXT_TEN_PAGES",

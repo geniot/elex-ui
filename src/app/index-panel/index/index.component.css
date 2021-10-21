@@ -44,11 +44,3 @@ a.headword-link:link, a.headword-link:visited, a.headword-link:hover, a.headword
   /*padding: 3px 6px 3px 6px;*/
   padding: 0;
 }
-
-.even {
-  background-color: #ececec;
-}
-
-.odd {
-  background-color: #f5f5f5;
-}

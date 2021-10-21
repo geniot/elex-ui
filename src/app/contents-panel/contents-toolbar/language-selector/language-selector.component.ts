@@ -59,29 +59,19 @@ export class LanguageSelectorComponent implements OnInit {
 
   onChangeSource(newValue) {
     this.selectedSourceLanguageCode = newValue;
-    for (let lang of this.infoService.model.value.sourceLanguages) {
-      if (this.selectedSourceLanguageCode == lang.sourceCode) {
-        lang.selected = true;
-      } else {
-        lang.selected = false;
-      }
-    }
+    this.infoService.setSelectedSourceLanguageCode(newValue);
     this.infoService.updateModel();
   }
 
   onChangeTarget(newValue) {
     this.selectedTargetLanguageCode = newValue;
-    for (let sourceLanguage of this.infoService.model.value.sourceLanguages) {
-      if (this.selectedSourceLanguageCode == sourceLanguage.sourceCode) {
-        for (let targetLanguage of sourceLanguage.targetLanguages) {
-          if (this.selectedTargetLanguageCode == targetLanguage.sourceCode) {
-            targetLanguage.selected = true;
-          } else {
-            targetLanguage.selected = false;
-          }
-        }
-      }
-    }
+    this.infoService.setSelectedTargetLanguageCode(this.selectedSourceLanguageCode, newValue);
+    this.infoService.updateModel();
+  }
+
+  onReverse() {
+    this.infoService.setSelectedSourceLanguageCode(this.selectedTargetLanguageCode);
+    this.infoService.setSelectedTargetLanguageCode(this.selectedTargetLanguageCode, this.selectedSourceLanguageCode);
     this.infoService.updateModel();
   }
 }

@@ -16,6 +16,7 @@ export class InfoService {
   baseApiUrl = environment.BASE_API_URL;
 
   modelLocalStorageName = 'elex-modelLocalStorageName';
+
   private dataUrl = this.baseApiUrl + '/data';
   private aboutUrl = this.baseApiUrl + '/about';
   private ftUrl = this.baseApiUrl + '/ft';
@@ -161,5 +162,29 @@ export class InfoService {
     this.http.post<AboutModel>(this.aboutUrl, JSON.stringify(this.aboutModel.value)).subscribe(model => {
       this.aboutModel.next(model);
     });
+  }
+
+  setSelectedSourceLanguageCode(newValue: string) {
+    for (let lang of this.model.value.sourceLanguages) {
+      if (newValue == lang.sourceCode) {
+        lang.selected = true;
+      } else {
+        lang.selected = false;
+      }
+    }
+  }
+
+  setSelectedTargetLanguageCode(selectedSourceLanguageCode: string, newValue: string) {
+    for (let sourceLanguage of this.model.value.sourceLanguages) {
+      if (selectedSourceLanguageCode == sourceLanguage.sourceCode) {
+        for (let targetLanguage of sourceLanguage.targetLanguages) {
+          if (newValue == targetLanguage.sourceCode) {
+            targetLanguage.selected = true;
+          } else {
+            targetLanguage.selected = false;
+          }
+        }
+      }
+    }
   }
 }

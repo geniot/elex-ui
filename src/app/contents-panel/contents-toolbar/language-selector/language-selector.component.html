@@ -1,14 +1,24 @@
 <select *ngIf="sourceLanguages().length>0"
         class="languageSelector"
+        style="margin-left: 5px"
         name="sourceLanguageSelector"
         [ngModel]="selectedSourceLanguageCode"
         (ngModelChange)="onChangeSource($event)">
   <option *ngFor="let sourceLanguage of sourceLanguages()" value="{{sourceLanguage}}">{{sourceLanguage}}</option>
 </select>
 
+<a (click)="onReverse()">
+  <img alt=""
+       title="Reverse Translation Direction"
+       style="vertical-align: text-bottom; margin-left: 2px;"
+       src="assets/arrow_refresh.png"
+       width="16" height="16">
+</a>
+
 <select *ngIf="targetLanguages().length>0"
         class="languageSelector"
-        style="margin-right: 5px;" name="targetLanguageSelector"
+        style="margin-left:3px;margin-right: 5px;"
+        name="targetLanguageSelector"
         [ngModel]="selectedTargetLanguageCode"
         (ngModelChange)="onChangeTarget($event)">
   <option *ngFor="let targetLanguage of targetLanguages()" value="{{targetLanguage}}">{{targetLanguage}}</option>

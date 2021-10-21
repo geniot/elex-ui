@@ -200,3 +200,11 @@ a:hover {
   float:right;
   margin-right: 5px;
 }
+
+.even {
+  background-color: #ececec;
+}
+
+.odd {
+  background-color: #f5f5f5;
+}
