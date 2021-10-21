@@ -27,6 +27,14 @@ export class SearchComponent implements OnInit {
           },0);
         }
       });
+    this.infoService.changeView.asObservable().subscribe(
+      changeView => {
+        if (!this.infoService.isScreenNarrow()){
+          setTimeout(()=>{ // this will make the execution after the above boolean has changed
+            this.searchElement.nativeElement.focus();
+          },0);
+        }
+      });
   }
 
   search($event: any) {
