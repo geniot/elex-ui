@@ -4,6 +4,7 @@ import {environment} from "../../../../environments/environment";
 import {InfoService} from "../../../info.service";
 import {HttpParams} from "@angular/common/http";
 import {MenuItem} from "primeng/api";
+import {Action} from "../../../model/action";
 
 @Component({
   selector: 'app-dictionary-button',
@@ -54,6 +55,7 @@ export class DictionaryButtonComponent implements OnInit {
   onClick() {
     this.dictionary.selected = !this.dictionary.selected;
     this.updateCSS();
+    this.infoService.model.value.action = Action.INDEX;
     this.infoService.updateModel();
   }
 
