@@ -4,7 +4,6 @@ import {cloneDeep} from 'lodash'
 import {InfoService} from "./info.service";
 import {LayoutConfig} from "./model/layoutconfig";
 import {Action} from "./model/action";
-import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {DialogService} from "primeng/dynamicdialog";
 import {AboutDialogComponent} from "./about-dialog/about-dialog.component";
 

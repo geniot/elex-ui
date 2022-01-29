@@ -4,25 +4,25 @@ import {AngularSplitModule} from 'angular-split';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
 
-import { FulltextPanelComponent } from './fulltext-panel/fulltext-panel.component';
-import { IndexPanelComponent } from './index-panel/index-panel.component';
+import {FulltextPanelComponent} from './fulltext-panel/fulltext-panel.component';
+import {IndexPanelComponent} from './index-panel/index-panel.component';
 
-import { ContentsPanelComponent } from './contents-panel/contents-panel.component';
-import { ContentsToolbarComponent } from './contents-panel/contents-toolbar/contents-toolbar.component';
-import { LanguageSelectorComponent } from './contents-panel/contents-toolbar/language-selector/language-selector.component';
-import { DictionaryButtonComponent } from './contents-panel/contents-toolbar/dictionary-button/dictionary-button.component';
+import {ContentsPanelComponent} from './contents-panel/contents-panel.component';
+import {ContentsToolbarComponent} from './contents-panel/contents-toolbar/contents-toolbar.component';
+import {LanguageSelectorComponent} from './contents-panel/contents-toolbar/language-selector/language-selector.component';
+import {DictionaryButtonComponent} from './contents-panel/contents-toolbar/dictionary-button/dictionary-button.component';
 
 import {InfoService} from "./info.service";
-import { IndexComponent } from './index-panel/index/index.component';
-import { SearchComponent } from './index-panel/search/search.component';
+import {IndexComponent} from './index-panel/index/index.component';
+import {SearchComponent} from './index-panel/search/search.component';
 import {PaginationComponent} from "./index-panel/pagination/pagination.component";
 import {ContextMenuModule} from "primeng/contextmenu";
 import {DialogModule} from 'primeng/dialog';
 import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
-import { AboutDialogComponent } from './about-dialog/about-dialog.component';
+import {AboutDialogComponent} from './about-dialog/about-dialog.component';
 import {TabMenuModule} from "primeng/tabmenu";
 import {TabViewModule} from 'primeng/tabview';
 import {HistoryPanelComponent} from "./history-panel/history-panel.component";
