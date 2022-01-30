@@ -1,23 +1,25 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {InfoService} from "../../info.service";
 import {Action} from "../../model/action";
+import {DestroyableComponent} from "../../destroyablecomponent";
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent extends DestroyableComponent implements OnInit {
 
   disabled: boolean = false;
   @ViewChild('searchInput') searchElement: ElementRef;
   searchValue:string = "";
 
   constructor(private infoService: InfoService) {
+    super();
   }
 
   ngOnInit(): void {
-    this.infoService.model.asObservable().subscribe(
+    this.subscriptions.push(this.infoService.model.asObservable().subscribe(
       model => {
         this.disabled = model.headwords.length == 0;
         this.searchValue = this.infoService.model.value.userInputs[this.infoService.getSelectedSourceLanguage()];
@@ -26,15 +28,15 @@ export class SearchComponent implements OnInit {
             this.searchElement.nativeElement.focus();
           },0);
         }
-      });
-    this.infoService.changeView.asObservable().subscribe(
+      }));
+    this.subscriptions.push(this.infoService.changeView.asObservable().subscribe(
       changeView => {
         if (!this.infoService.isScreenNarrow()){
           setTimeout(()=>{ // this will make the execution after the above boolean has changed
             this.searchElement.nativeElement.focus();
           },0);
         }
-      });
+      }));
   }
 
   search($event: any) {

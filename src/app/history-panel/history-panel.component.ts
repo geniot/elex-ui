@@ -3,24 +3,26 @@ import {InfoService} from "../info.service";
 import {environment} from "../../environments/environment";
 import {HistoryItem} from "../model/historyitem";
 import {Action} from "../model/action";
+import {DestroyableComponent} from "../destroyablecomponent";
 
 @Component({
   selector: 'app-history-panel',
   templateUrl: './history-panel.component.html',
   styleUrls: ['./history-panel.component.css']
 })
-export class HistoryPanelComponent implements OnInit {
+export class HistoryPanelComponent extends DestroyableComponent implements OnInit {
   historyItems: HistoryItem[] = [];
   @ViewChild('container') myDiv: ElementRef;
 
   constructor(private infoService: InfoService) {
+    super();
   }
 
   ngOnInit(): void {
-    this.infoService.model.asObservable().subscribe(
+    this.subscriptions.push(this.infoService.model.asObservable().subscribe(
       model => {
         this.historyItems = model.historyItems;
-      });
+      }));
   }
 
   onClick(historyItem: HistoryItem) {

@@ -4,23 +4,25 @@ import {Entry} from "../model/entry";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {Action} from "../model/action";
 import {environment} from "../../environments/environment";
+import {DestroyableComponent} from "../destroyablecomponent";
 
 @Component({
   selector: 'app-contents-panel',
   templateUrl: './contents-panel.component.html',
   styleUrls: ['./contents-panel.component.css']
 })
-export class ContentsPanelComponent implements OnInit {
+export class ContentsPanelComponent extends DestroyableComponent implements OnInit {
   baseApiUrl = environment.BASE_API_URL;
   entryBody: SafeHtml;
   displayingHeadword: String;
   @ViewChild('container') myDiv: ElementRef;
 
   constructor(private infoService: InfoService, private sanitizer: DomSanitizer) {
+    super();
   }
 
   ngOnInit(): void {
-    this.infoService.model.asObservable().subscribe(
+    this.subscriptions.push(this.infoService.model.asObservable().subscribe(
       model => {
         if (model.entries.length > 0) {
           if (this.myDiv != null && this.displayingHeadword != model.entries[0].headword) {
@@ -31,7 +33,7 @@ export class ContentsPanelComponent implements OnInit {
         } else {
           this.entryBody = "";
         }
-      });
+      }));
   }
 
   private collect(entries: Entry[]): string {

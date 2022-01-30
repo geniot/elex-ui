@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {InfoService} from "../../info.service";
 import {Action} from "../../model/action";
+import {DestroyableComponent} from "../../destroyablecomponent";
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.css']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent extends DestroyableComponent implements OnInit {
 
   src1: string;
   srcOn1: string = "assets/start/control_start_blue_over.png";
@@ -55,14 +56,15 @@ export class PaginationComponent implements OnInit {
   endReached: boolean = false;
 
   constructor(private infoService: InfoService) {
+    super();
   }
 
   ngOnInit(): void {
-    this.infoService.model.asObservable().subscribe(
+    this.subscriptions.push(this.infoService.model.asObservable().subscribe(
       model => {
         this.startReached = model.startReached;
         this.endReached = model.endReached;
-      });
+      }));
   }
 
   onToStartClick($event: MouseEvent) {

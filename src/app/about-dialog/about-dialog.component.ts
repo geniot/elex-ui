@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {AboutModel} from "../model/aboutmodel";
-import {MenuItem} from "primeng/api";
 
 @Component({
   selector: 'app-about-dialog',

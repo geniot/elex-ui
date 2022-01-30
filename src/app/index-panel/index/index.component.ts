@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {InfoService} from "../../info.service";
 import {Headword} from "../../model/headword";
 import {Action} from "../../model/action";
+import {DestroyableComponent} from "../../destroyablecomponent";
 
 @Component({
   selector: 'app-index',
@@ -9,20 +10,21 @@ import {Action} from "../../model/action";
   styleUrls: ['./index.component.css'],
 })
 
-export class IndexComponent implements OnInit {
+export class IndexComponent extends DestroyableComponent implements OnInit {
   headwords: Headword[] = [];
   selectedHeadwords: Map<string, string> = new Map();
 
 
   constructor(private infoService: InfoService) {
+    super();
   }
 
   ngOnInit() {
-    this.infoService.model.asObservable().subscribe(
+    this.subscriptions.push(this.infoService.model.asObservable().subscribe(
       model => {
         this.headwords = model.headwords;
         this.selectedHeadwords = model.selectedHeadwords as Map<string, string>;
-      });
+      }));
   }
 
 

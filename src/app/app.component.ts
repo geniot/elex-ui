@@ -6,6 +6,7 @@ import {LayoutConfig} from "./model/layoutconfig";
 import {Action} from "./model/action";
 import {DialogService} from "primeng/dynamicdialog";
 import {AboutDialogComponent} from "./about-dialog/about-dialog.component";
+import {DestroyableComponent} from "./destroyablecomponent";
 
 
 @Component({
@@ -14,7 +15,7 @@ import {AboutDialogComponent} from "./about-dialog/about-dialog.component";
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent extends DestroyableComponent {
   splitLayoutLocalStorageName = 'elex-splitLayoutLocalStorageName';
   config: LayoutConfig = null;
   defaultConfig: LayoutConfig = new LayoutConfig();
@@ -24,6 +25,7 @@ export class AppComponent {
   ftSearchResultsCount: number = 0;
 
   constructor(private infoService: InfoService, public dialogService: DialogService) {
+    super();
   }
 
   ngOnInit() {
@@ -31,27 +33,27 @@ export class AppComponent {
      * Mobile (Smartphone) max-width: 480px
      * Low Resolution Tablets and ipads max-width: 767px
      */
-    this.infoService.changeWidth.asObservable().subscribe(
+    this.subscriptions.push(this.infoService.changeWidth.asObservable().subscribe(
       () => {
         this.isScreenNarrow = this.infoService.isScreenNarrow();
-      });
+      }));
 
 
-    this.infoService.model.asObservable().subscribe(
+    this.subscriptions.push(this.infoService.model.asObservable().subscribe(
       model => {
         if (model.action == Action.INDEX ||
           model.action == Action.FT_LINK ||
           (model.action == Action.SEARCH && model.exactMatch)) {
           this.contentViewName = "article";
         }
-      });
+      }));
 
-    this.infoService.ftModel.asObservable().subscribe(
+    this.subscriptions.push(this.infoService.ftModel.asObservable().subscribe(
       ftModel => {
         this.ftSearchResultsCount = ftModel.searchResults.length;
-      });
+      }));
 
-    this.infoService.aboutModel.asObservable().subscribe(
+    this.subscriptions.push(this.infoService.aboutModel.asObservable().subscribe(
       aboutModel => {
         if (Object.keys(aboutModel.abouts).length > 0) {
           this.dialogService.open(AboutDialogComponent, {
@@ -62,9 +64,9 @@ export class AppComponent {
             width: '70%'
           });
         }
-      });
+      }));
 
-    this.infoService.changeView.asObservable().subscribe(
+    this.subscriptions.push(this.infoService.changeView.asObservable().subscribe(
       columns => {
         if (this.config != null) {
           for (let i = 0; i < this.config.columns.length; i++) {
@@ -76,7 +78,7 @@ export class AppComponent {
           }
           this.saveLocalStorage();
         }
-      });
+      }));
 
     if (localStorage.getItem(this.splitLayoutLocalStorageName)) {
       this.config = JSON.parse(localStorage.getItem(this.splitLayoutLocalStorageName));

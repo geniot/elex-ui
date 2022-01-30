@@ -1,21 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {Language} from "../../../model/language";
 import {InfoService} from "../../../info.service";
+import {DestroyableComponent} from "../../../destroyablecomponent";
 
 @Component({
   selector: 'app-language-selector',
   templateUrl: './language-selector.component.html',
   styleUrls: ['./language-selector.component.css']
 })
-export class LanguageSelectorComponent implements OnInit {
+export class LanguageSelectorComponent extends DestroyableComponent implements OnInit {
   selectedSourceLanguageCode: string;
   selectedTargetLanguageCode: string;
 
   constructor(private infoService: InfoService) {
+    super();
   }
 
   ngOnInit(): void {
-    this.infoService.model.subscribe(
+    this.subscriptions.push(this.infoService.model.subscribe(
       model => {
         //setting defaults from local storage if any
         if (model.sourceLanguages.length > 0) {
@@ -31,7 +33,7 @@ export class LanguageSelectorComponent implements OnInit {
             }
           }
         }
-      });
+      }));
   }
 
   sourceLanguages() {
