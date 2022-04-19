@@ -32,7 +32,7 @@
 <ng-template #isScreenWide>
   <as-split direction="horizontal" (dragEnd)="onDragEnd($event)">
 
-    <as-split-area *ngIf="config.columns[0].visible" [size]="config.columns[0].size">
+    <as-split-area style="overflow-y: hidden" *ngIf="config.columns[0].visible" [size]="config.columns[0].size">
       <app-index-panel></app-index-panel>
     </as-split-area>
 
