@@ -41,7 +41,6 @@ export class ContentsPanelComponent extends DestroyableComponent implements OnIn
     for (let i = 0; i < entries.length; i++) {
       let entry: Entry = entries[i];
       res += '<span class="dic-name">' + entry.dicName + '</span>';
-      res += '<div class="hwd">' + entry.headword + '</div>';
       res += entry.body;
       if (entries.length > 1 && i < entries.length - 1) {
         res += "<hr/>";
