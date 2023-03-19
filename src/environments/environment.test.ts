@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  BASE_API_URL: '/elex',
+  BASE_API_URL: '',
 };
