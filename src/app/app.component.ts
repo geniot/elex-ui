@@ -1,6 +1,6 @@
 import {Component, HostListener} from '@angular/core';
 import {IOutputData} from "angular-split";
-import {cloneDeep} from 'lodash'
+import {cloneDeep} from 'lodash-es'
 import {InfoService} from "./info.service";
 import {LayoutConfig} from "./model/layoutconfig";
 import {Action} from "./model/action";
@@ -17,7 +17,7 @@ import {DestroyableComponent} from "./destroyablecomponent";
 
 export class AppComponent extends DestroyableComponent {
   splitLayoutLocalStorageName = 'elex-splitLayoutLocalStorageName';
-  config: LayoutConfig = null;
+  config: LayoutConfig;
   defaultConfig: LayoutConfig = new LayoutConfig();
   isScreenNarrow: boolean = false;
   //narrow-view specific:
@@ -81,7 +81,7 @@ export class AppComponent extends DestroyableComponent {
       }));
 
     if (localStorage.getItem(this.splitLayoutLocalStorageName)) {
-      this.config = JSON.parse(localStorage.getItem(this.splitLayoutLocalStorageName));
+      this.config = JSON.parse(localStorage.getItem(this.splitLayoutLocalStorageName)!);
       //in rare cases we may want to add/remove columns and we need to stay in sync
       if (this.config.columns.length != this.defaultConfig.columns.length) {
         this.resetConfig();

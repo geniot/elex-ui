@@ -26,6 +26,7 @@ import {AboutDialogComponent} from './about-dialog/about-dialog.component';
 import {TabMenuModule} from "primeng/tabmenu";
 import {TabViewModule} from 'primeng/tabview';
 import {HistoryPanelComponent} from "./history-panel/history-panel.component";
+import {CommonModule} from "@angular/common";
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import {HistoryPanelComponent} from "./history-panel/history-panel.component";
     HistoryPanelComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AngularSplitModule,
     BrowserAnimationsModule,

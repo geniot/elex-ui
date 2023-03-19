@@ -25,13 +25,13 @@ export class InfoService {
   model: BehaviorSubject<Model> = new BehaviorSubject(new Model());
   ftModel: BehaviorSubject<FtModel> = new BehaviorSubject(new FtModel());
   aboutModel: BehaviorSubject<AboutModel> = new BehaviorSubject(new AboutModel());
-  changeHeight: BehaviorSubject<Number> = new BehaviorSubject(0);
-  changeWidth: BehaviorSubject<Number> = new BehaviorSubject(0);
-  changeView: BehaviorSubject<Number> = new BehaviorSubject(3);
+  changeHeight: BehaviorSubject<Number> = new BehaviorSubject<Number>(0);
+  changeWidth: BehaviorSubject<Number> = new BehaviorSubject<Number>(0);
+  changeView: BehaviorSubject<Number> = new BehaviorSubject<Number>(3);
   /**
    * To switch view from index to article in narrow screen we keep track of the changed selected headword
    */
-  selectedHeadword: BehaviorSubject<String> = new BehaviorSubject(null);
+  selectedHeadword: BehaviorSubject<String> = new BehaviorSubject<String>("");
   mouseWheelChangeValue = new Subject();
 
   constructor(public http: HttpClient) {
@@ -40,7 +40,7 @@ export class InfoService {
     let m: Model = new Model();
     m.selectedIndex = Math.round(this.visibleIndexSize() / 2);
     if (localStorage.getItem(this.modelLocalStorageName)) {
-      m = JSON.parse(localStorage.getItem(this.modelLocalStorageName));
+      m = JSON.parse(localStorage.getItem(this.modelLocalStorageName)!);
       m.action = Action.INIT;
     }
     m.baseApiUrl = this.baseApiUrl;
@@ -62,7 +62,7 @@ export class InfoService {
       .asObservable()
       .pipe(debounceTime(50))
       .subscribe(deltaY => {
-        if (deltaY > 0) {
+        if ((deltaY as number) > 0) {
           this.model.value.action = Action.NEXT_WORD;
         } else {
           this.model.value.action = Action.PREVIOUS_WORD;
