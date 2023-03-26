@@ -6,7 +6,10 @@ import {LayoutConfig} from "./model/layoutconfig";
 import {Action} from "./model/action";
 import {DialogService} from "primeng/dynamicdialog";
 import {AboutDialogComponent} from "./about-dialog/about-dialog.component";
+import {AdminDialogComponent} from "./admin-dialog/admin-dialog.component";
 import {DestroyableComponent} from "./destroyablecomponent";
+import {DynamicDialogRef} from "primeng/dynamicdialog/dynamicdialog-ref";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -56,12 +59,33 @@ export class AppComponent extends DestroyableComponent {
     this.subscriptions.push(this.infoService.aboutModel.asObservable().subscribe(
       aboutModel => {
         if (Object.keys(aboutModel.abouts).length > 0) {
-          this.dialogService.open(AboutDialogComponent, {
+          let ref: DynamicDialogRef = this.dialogService.open(AboutDialogComponent, {
             data: {
               aboutModel: aboutModel
             },
             header: aboutModel.dictionary.name,
             width: '70%'
+          });
+          let sub: Subscription = ref.onClose.subscribe(() => {
+            this.infoService.closeDialog.next(true);
+            sub.unsubscribe();
+          });
+        }
+      }));
+
+    this.subscriptions.push(this.infoService.adminModel.asObservable().subscribe(
+      adminModel => {
+        if (adminModel.action != Action.INIT) {
+          let ref: DynamicDialogRef = this.dialogService.open(AdminDialogComponent, {
+            data: {
+              adminModel: adminModel
+            },
+            header: "Admin",
+            width: '90%'
+          });
+          let sub: Subscription = ref.onClose.subscribe(() => {
+            this.infoService.closeDialog.next(true);
+            sub.unsubscribe();
           });
         }
       }));

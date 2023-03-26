@@ -1,17 +1,18 @@
 <div class="table container">
   <div class="table-row header">
-    <div *ngIf="searchResultsFor!=null && searchResultsFor.length>0 && searchResults.length>0;else elseBlock">
-      <div class="ui-widget-header">
-        <span style="padding-left: 10px">Full-text search results for:
+    <div class="ui-widget-header">
+        <span *ngIf="searchResultsFor!=null && searchResultsFor.length>0 && searchResults.length>0;"
+              style="padding-left: 10px">Full-text search results for:
           <b>
             <a (click)="onClick(searchResultsFor)" style="cursor: pointer;">{{searchResultsFor}}</a>
           </b>
         </span>
-      </div>
+      <img title="Admin"
+           [className]="'pane-view-button-selected'"
+           style="  margin-left: auto;margin-right: 5px;cursor: pointer;"
+           (click)="this.onAdminClick($event)"
+           src="assets/application_view_admin.png"/>
     </div>
-    <ng-template #elseBlock>
-      <div class="ui-widget-header"></div>
-    </ng-template>
   </div>
   <div class="table-row body">
     <div class="table-cell body-content-outer-wrapper">

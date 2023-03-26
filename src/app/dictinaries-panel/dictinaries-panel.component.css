@@ -1,0 +1,22 @@
+.even {
+  background-color: #ececec;
+}
+
+.odd {
+  background-color: #f5f5f5;
+}
+
+.dictionary{
+  color:black;
+  padding:5px;
+  cursor:default;
+}
+
+.dictionary-selected{
+  background-color: orange;
+  color:white;
+}
+
+.dictionary-disabled{
+  color:gray;
+}

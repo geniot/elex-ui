@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {AboutModel} from "../model/aboutmodel";
 
@@ -7,9 +7,10 @@ import {AboutModel} from "../model/aboutmodel";
   templateUrl: './about-dialog.component.html',
   styleUrls: ['./about-dialog.component.css']
 })
-export class AboutDialogComponent implements OnInit {
-  keys:string[] = [];
-  values:string[] = [];
+export class AboutDialogComponent implements OnInit, AfterContentInit {
+  keys: string[] = [];
+  values: string[] = [];
+  @ViewChild('focusElement') focusElement: ElementRef;
 
   constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig) {
     let aboutModel: AboutModel = config.data.aboutModel;
@@ -18,6 +19,12 @@ export class AboutDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngAfterContentInit(): void {
+    setTimeout(() => {
+      this.focusElement.nativeElement.focus();
+    }, 50);
   }
 
 }

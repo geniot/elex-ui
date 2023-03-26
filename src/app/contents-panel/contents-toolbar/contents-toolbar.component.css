@@ -1,9 +1,1 @@
-.pane-view-button{
-  cursor: pointer;
-  margin-right: 5px;
-  filter: opacity(30%);
-}
 
-.pane-view-button-selected{
-  filter: drop-shadow(2px 2px 2px gray);
-}

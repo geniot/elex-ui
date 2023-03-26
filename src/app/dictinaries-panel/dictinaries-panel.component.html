@@ -1,0 +1,30 @@
+<div class="table container">
+  <div class="table-row header">
+    <div class="ui-widget ui-widget-header">
+      <img src="assets/books.png"/>
+      &nbsp;&nbsp;<b>Dictionaries</b>
+    </div>
+  </div>
+  <div class="table-row body">
+    <div class="table-cell body-content-outer-wrapper">
+      <div class="body-content-inner-wrapper">
+        <div *ngFor="let dictionary of dictionaries;let index=index; let odd=odd; let even=even;"
+             [ngClass]="odd ? 'odd' : 'even'"
+        >
+          <div (click)="onSelect(dictionary)"
+               [ngClass]="{
+               'dictionary':true,
+               'dictionary-selected': dictionary.selected,
+               'dictionary-disabled':dictionary.status=='DISABLED'
+               }">{{dictionary.name}}<span style="font-size: 10pt;color: blue;font-weight: bold;" *ngIf="dictionary.task!=null"> {{dictionary.task.progress}}%</span></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-row header">
+    <div class="ui-widget ui-widget-footer">
+      <img title="Re-index All" (click)="onReindexAll()" style="cursor:pointer;" src="assets/table_refresh.png"/>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,9 @@ import {environment} from "../environments/environment";
 import {FtModel} from "./model/ftmodel";
 import {Dictionary} from "./model/dictionary";
 import {AboutModel} from "./model/aboutmodel";
+import {AdminModel} from "./model/adminmodel";
+import {TaskExecutorModel} from "./model/taskexecutormodel";
+import {AdminDictionary} from "./model/admindictionary";
 
 
 @Injectable({providedIn: 'root'})
@@ -23,11 +26,16 @@ export class InfoService {
   public cssUrl = this.baseApiUrl + '/css';
 
   model: BehaviorSubject<Model> = new BehaviorSubject(new Model());
+  adminModel: BehaviorSubject<AdminModel> = new BehaviorSubject(new AdminModel());
   ftModel: BehaviorSubject<FtModel> = new BehaviorSubject(new FtModel());
   aboutModel: BehaviorSubject<AboutModel> = new BehaviorSubject(new AboutModel());
   changeHeight: BehaviorSubject<Number> = new BehaviorSubject<Number>(0);
   changeWidth: BehaviorSubject<Number> = new BehaviorSubject<Number>(0);
   changeView: BehaviorSubject<Number> = new BehaviorSubject<Number>(3);
+  closeDialog: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
+  taskExecutorUrl = this.baseApiUrl + '/admin/tasks';
+  taskExecutorModel: BehaviorSubject<TaskExecutorModel> = new BehaviorSubject(new TaskExecutorModel());
+  selectedDictionary: BehaviorSubject<AdminDictionary> = new BehaviorSubject(AdminDictionary.EMPTY);
   /**
    * To switch view from index to article in narrow screen we keep track of the changed selected headword
    */
@@ -164,6 +172,15 @@ export class InfoService {
     });
   }
 
+  public onAdmin(): void {
+    alert('admin')
+    // this.aboutModel.value.dictionary = dictionary;
+    // this.aboutModel.value.abouts = new Map();
+    // this.http.post<AboutModel>(this.aboutUrl, JSON.stringify(this.aboutModel.value)).subscribe(model => {
+    //   this.aboutModel.next(model);
+    // });
+  }
+
   setSelectedSourceLanguageCode(newValue: string) {
     for (let lang of this.model.value.sourceLanguages) {
       if (newValue == lang.sourceCode) {
@@ -186,5 +203,11 @@ export class InfoService {
         }
       }
     }
+  }
+
+  updateTaskExecutorModel() {
+    this.http.get<TaskExecutorModel>(this.taskExecutorUrl).subscribe(model => {
+      this.taskExecutorModel.next(model);
+    });
   }
 }

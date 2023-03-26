@@ -16,7 +16,7 @@ export class FulltextPanelComponent extends DestroyableComponent implements OnIn
   searchResultsFor: string;
   @ViewChild('container') myDiv: ElementRef;
 
-  constructor(private infoService: InfoService) {
+  constructor(public infoService: InfoService) {
     super();
   }
 
@@ -40,5 +40,11 @@ export class FulltextPanelComponent extends DestroyableComponent implements OnIn
 
   getDictionaryNameById(dictionaryId: number) {
     return this.infoService.getDictionaryNameById(dictionaryId);
+  }
+
+  onAdminClick($event: MouseEvent) {
+    if ($event.ctrlKey) {
+      this.infoService.onAdmin();
+    }
   }
 }

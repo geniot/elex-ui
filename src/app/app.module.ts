@@ -27,6 +27,9 @@ import {TabMenuModule} from "primeng/tabmenu";
 import {TabViewModule} from 'primeng/tabview';
 import {HistoryPanelComponent} from "./history-panel/history-panel.component";
 import {CommonModule} from "@angular/common";
+import {AdminDialogComponent} from "./admin-dialog/admin-dialog.component";
+import {InfoPanelComponent} from "./info-panel/info-panel.component";
+import {DictinariesPanelComponent} from "./dictinaries-panel/dictinaries-panel.component";
 
 
 @NgModule({
@@ -42,7 +45,10 @@ import {CommonModule} from "@angular/common";
     SearchComponent,
     PaginationComponent,
     AboutDialogComponent,
-    HistoryPanelComponent
+    AdminDialogComponent,
+    HistoryPanelComponent,
+    InfoPanelComponent,
+    DictinariesPanelComponent
   ],
   imports: [
     CommonModule,
