@@ -19,8 +19,10 @@ export class InfoService {
   baseApiUrl = environment.BASE_API_URL;
 
   modelLocalStorageName = 'elex-modelLocalStorageName';
+  adminModelLocalStorageName = 'elex-admin-modelLocalStorageName';
 
   private dataUrl = this.baseApiUrl + '/data';
+  private adminDataUrl = this.baseApiUrl + '/adminData';
   private aboutUrl = this.baseApiUrl + '/about';
   private ftUrl = this.baseApiUrl + '/ft';
   public cssUrl = this.baseApiUrl + '/css';
@@ -33,7 +35,7 @@ export class InfoService {
   changeWidth: BehaviorSubject<Number> = new BehaviorSubject<Number>(0);
   changeView: BehaviorSubject<Number> = new BehaviorSubject<Number>(3);
   closeDialog: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
-  taskExecutorUrl = this.baseApiUrl + '/admin/tasks';
+  taskExecutorUrl = this.baseApiUrl + '/tasks';
   taskExecutorModel: BehaviorSubject<TaskExecutorModel> = new BehaviorSubject(new TaskExecutorModel());
   selectedDictionary: BehaviorSubject<AdminDictionary> = new BehaviorSubject(AdminDictionary.EMPTY);
   /**
@@ -77,6 +79,15 @@ export class InfoService {
         }
         this.updateModel();
       });
+
+    this.taskExecutorModel.asObservable().subscribe(
+      taskExecutorModel => {
+        for (let task of taskExecutorModel.tasks) {
+          if (task.action == Action.POOL_UPDATE) {
+            this.updateAdminModel();
+          }
+        }
+      });
   }
 
   updateModel() {
@@ -95,6 +106,14 @@ export class InfoService {
         this.ftModel.next(ftModel);
       });
     }
+  }
+
+
+  public updateAdminModel(): void {
+    this.http.post<AdminModel>(this.adminDataUrl, JSON.stringify(this.adminModel.value)).subscribe(adminModel => {
+      localStorage.setItem(this.adminModelLocalStorageName, JSON.stringify(adminModel));
+      this.adminModel.next(adminModel);
+    });
   }
 
   visibleIndexSize(): number {
@@ -170,15 +189,6 @@ export class InfoService {
     this.http.post<AboutModel>(this.aboutUrl, JSON.stringify(this.aboutModel.value)).subscribe(model => {
       this.aboutModel.next(model);
     });
-  }
-
-  public onAdmin(): void {
-    alert('admin')
-    // this.aboutModel.value.dictionary = dictionary;
-    // this.aboutModel.value.abouts = new Map();
-    // this.http.post<AboutModel>(this.aboutUrl, JSON.stringify(this.aboutModel.value)).subscribe(model => {
-    //   this.aboutModel.next(model);
-    // });
   }
 
   setSelectedSourceLanguageCode(newValue: string) {

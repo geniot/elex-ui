@@ -75,17 +75,19 @@ export class AppComponent extends DestroyableComponent {
 
     this.subscriptions.push(this.infoService.adminModel.asObservable().subscribe(
       adminModel => {
-        if (adminModel.action != Action.INIT) {
+        if (adminModel.action == Action.INIT) {
           let ref: DynamicDialogRef = this.dialogService.open(AdminDialogComponent, {
             data: {
               adminModel: adminModel
             },
-            header: "Admin",
-            width: '90%'
+            header: "Admin Dashboard",
+            width: '95%',
+            height: '95%'
           });
           let sub: Subscription = ref.onClose.subscribe(() => {
             this.infoService.closeDialog.next(true);
             sub.unsubscribe();
+            this.infoService.updateModel();
           });
         }
       }));

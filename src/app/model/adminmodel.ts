@@ -5,7 +5,7 @@ import {AdminDictionary} from "./admindictionary";
 export class AdminModel {
   adminDictionaries: AdminDictionary[] = [];
   baseApiUrl: String = environment.BASE_API_URL;
-  action: Action = Action.INIT;
+  action: Action = Action.NONE;
 }
 
 

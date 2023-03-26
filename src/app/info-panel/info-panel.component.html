@@ -3,7 +3,7 @@
     <div class="ui-widget ui-widget-header">
       <div *ngIf="selectedDictionary">
         <img title="{{selectedDictionary.name}}"
-             style="vertical-align: text-bottom"
+             style="margin-left:10px;vertical-align: text-bottom"
              src="{{baseApiUrl}}/icon?id={{selectedDictionary.id}}" width="14" height="21">
         &nbsp;&nbsp;<b>{{selectedDictionary.name}}</b>
       </div>
@@ -11,124 +11,125 @@
   </div>
   <div class="table-row body">
     <div class="table-cell body-content-outer-wrapper">
-      <div *ngIf="selectedDictionary" class="body-content-inner-wrapper">
-        <table id="dictionary">
-          <tbody>
-          <tr>
-            <td>Dictionary Status</td>
-            <td *ngIf="selectedDictionary.status=='ENABLED';else elseDisabled"><span
-              style="font-size: 8pt;">{{selectedDictionary.status}}</span>&nbsp;&nbsp;&nbsp;
-              <a *ngIf="task==null;else elseStatus"
-                 (click)="onChangeStatus()">{{changeStatusTxt(selectedDictionary.status)}}</a>
-              <ng-template #elseStatus>
-                <span class="disabled-link">{{changeStatusTxt(selectedDictionary.status)}}</span>
-              </ng-template>
-            </td>
-            <ng-template #elseDisabled>
-              <td><a *ngIf="task==null;else elseStatus"
-                     (click)="onChangeStatus()">{{changeStatusTxt(selectedDictionary.status)}}</a>
-                &nbsp;&nbsp;&nbsp;
-                <span
-                  style="font-size: 8pt;">{{selectedDictionary.status}}</span>
+      <div class="body-content-inner-wrapper">
+        <div *ngIf="selectedDictionary" class="body-content-inner-wrapper">
+          <table id="dictionary">
+            <tbody>
+            <tr>
+              <td>Dictionary Status</td>
+              <td *ngIf="selectedDictionary.status=='ENABLED';else elseDisabled"><span
+                style="font-size: 8pt;">{{selectedDictionary.status}}</span>&nbsp;&nbsp;&nbsp;
+                <a *ngIf="task==null;else elseStatus"
+                   (click)="onChangeStatus()">{{changeStatusTxt(selectedDictionary.status)}}</a>
                 <ng-template #elseStatus>
                   <span class="disabled-link">{{changeStatusTxt(selectedDictionary.status)}}</span>
                 </ng-template>
               </td>
-            </ng-template>
-          </tr>
-          <tr>
-            <td style="width:150px;">File</td>
-            <td>{{selectedDictionary.dataPath}}<span style="color:blue;">{{selectedDictionary.fileName}}</span></td>
-          </tr>
-          <tr>
-            <td>Download</td>
-            <td><a *ngIf="selectedDictionary.status=='ENABLED';else elseDisabledEzp" (click)="onDownload(selectedDictionary,'ezp')">EZP</a>
-            <ng-template #elseDisabledEzp>
-              <span class="disabled-link">EZP</span>
-            </ng-template>
-            </td>
-          </tr>
-          <tr>
-            <td>Size</td>
-            <td>{{selectedDictionary.fileSize}}&nbsp;bytes</td>
-          </tr>
-          <tr>
-            <td>Number of Entries</td>
-            <td *ngIf="selectedDictionary.status=='ENABLED';else elseEmpty">{{selectedDictionary.entries}}</td>
-            <ng-template #elseEmpty>
-              <td>-</td>
-            </ng-template>
-          </tr>
-          <tr>
-            <td>Index Language</td>
-            <td
-              *ngIf="selectedDictionary.status=='ENABLED';else elseEmpty">{{selectedDictionary.indexLanguageCode}}</td>
-          </tr>
-          <tr>
-            <td>Contents Language</td>
-            <td
-              *ngIf="selectedDictionary.status=='ENABLED';else elseEmpty">{{selectedDictionary.contentsLanguageCode}}</td>
-          </tr>
-          <tr>
-            <td class="spacer" colspan="2"></td>
-          </tr>
-          <tr>
-            <td>Resources File</td>
-            <td *ngIf="selectedDictionary.resourcesFileName;else elseBlock">
-              {{selectedDictionary.dataPath}}<span style="color:blue;">{{selectedDictionary.resourcesFileName}}</span>
-            </td>
-            <ng-template #elseBlock>
-              <td>-</td>
-            </ng-template>
-          </tr>
-          <tr>
-            <td>Download</td>
-            <td *ngIf="selectedDictionary.resourcesFileName && selectedDictionary.status=='ENABLED';else elseBlock"><a
-              (click)="onDownload(selectedDictionary,'ezr')">EZR</a></td>
-          </tr>
-          <tr>
-            <td>Resources Size</td>
-            <td *ngIf="selectedDictionary.resourcesFileName;else elseBlock">{{selectedDictionary.resourcesFileSize}}&nbsp;bytes</td>
-          </tr>
-          <tr>
-            <td>Resources Count</td>
-            <td
-              *ngIf="selectedDictionary.status=='ENABLED' && selectedDictionary.resourcesFileName;else elseBlock">{{selectedDictionary.resourcesCount}}</td>
-          </tr>
-          <tr>
-            <td class="spacer" colspan="2"></td>
-          </tr>
-          <tr>
-            <td>Full-text Index (FTI)</td>
-            <!--            <span class="disabled-link">DELETE</span>-->
-            <td><a *ngIf="task==null && selectedDictionary.status=='ENABLED';else elseReindex" (click)="onReindex()">RE-INDEX</a>
-              <ng-template #elseReindex>
-                <span class="disabled-link">RE-INDEX</span>
+              <ng-template #elseDisabled>
+                <td><a *ngIf="task==null;else elseStatus"
+                       (click)="onChangeStatus()">{{changeStatusTxt(selectedDictionary.status)}}</a>
+                  &nbsp;&nbsp;&nbsp;
+                  <span
+                    style="font-size: 8pt;">{{selectedDictionary.status}}</span>
+                  <ng-template #elseStatus>
+                    <span class="disabled-link">{{changeStatusTxt(selectedDictionary.status)}}</span>
+                  </ng-template>
+                </td>
               </ng-template>
-              <span *ngIf="task!=null">&nbsp;&nbsp;&nbsp;<span
-                [ngStyle]="{'font-weight':'bold','font-size':'8pt','color':getTaskColor(task.status)}">{{task.status}}</span>&nbsp;{{task.progress}}
-                %</span>
-            </td>
-          </tr>
-          <tr>
-            <td>FTI Size</td>
-            <td *ngIf="selectedDictionary.status=='ENABLED';else elseEmpty">{{selectedDictionary.ftIndexSize}}&nbsp;bytes</td>
-          </tr>
-          <tr>
-            <td class="spacer" colspan="2"></td>
-          </tr>
-          <tr>
-            <td>Total Size</td>
-            <td
-              *ngIf="selectedDictionary.status=='ENABLED';else elseEmpty">{{selectedDictionary.totalSize}}&nbsp;bytes
-            </td>
-          </tr>
-          </tbody>
-        </table>
+            </tr>
+            <tr>
+              <td style="width:150px;">File</td>
+              <td>{{selectedDictionary.dataPath}}<span style="color:blue;">{{selectedDictionary.fileName}}</span></td>
+            </tr>
+            <tr>
+              <td>Download</td>
+              <td><a *ngIf="selectedDictionary.status=='ENABLED';else elseDisabledEzp"
+                     (click)="onDownload(selectedDictionary,'ezp')">EZP</a>
+                <ng-template #elseDisabledEzp>
+                  <span class="disabled-link">EZP</span>
+                </ng-template>
+              </td>
+            </tr>
+            <tr>
+              <td>Size</td>
+              <td>{{selectedDictionary.fileSize}}&nbsp;bytes</td>
+            </tr>
+            <tr>
+              <td>Number of Entries</td>
+              <td *ngIf="selectedDictionary.status=='ENABLED';else elseEmpty">{{selectedDictionary.entries}}</td>
+              <ng-template #elseEmpty>
+                <td>-</td>
+              </ng-template>
+            </tr>
+            <tr>
+              <td>Index Language</td>
+              <td
+                *ngIf="selectedDictionary.status=='ENABLED';else elseEmpty">{{selectedDictionary.indexLanguageCode}}</td>
+            </tr>
+            <tr>
+              <td style="white-space:nowrap">Contents Language</td>
+              <td
+                *ngIf="selectedDictionary.status=='ENABLED';else elseEmpty">{{selectedDictionary.contentsLanguageCode}}</td>
+            </tr>
+            <tr>
+              <td class="spacer" colspan="2"></td>
+            </tr>
+            <tr>
+              <td>Resources File</td>
+              <td *ngIf="selectedDictionary.resourcesFileName;else elseBlock">
+                {{selectedDictionary.dataPath}}<span style="color:blue;">{{selectedDictionary.resourcesFileName}}</span>
+              </td>
+              <ng-template #elseBlock>
+                <td>-</td>
+              </ng-template>
+            </tr>
+            <tr>
+              <td>Download</td>
+              <td *ngIf="selectedDictionary.resourcesFileName && selectedDictionary.status=='ENABLED';else elseBlock"><a
+                (click)="onDownload(selectedDictionary,'ezr')">EZR</a></td>
+            </tr>
+            <tr>
+              <td>Resources Size</td>
+              <td *ngIf="selectedDictionary.resourcesFileName;else elseBlock">{{selectedDictionary.resourcesFileSize}}&nbsp;bytes</td>
+            </tr>
+            <tr>
+              <td>Resources Count</td>
+              <td
+                *ngIf="selectedDictionary.status=='ENABLED' && selectedDictionary.resourcesFileName;else elseBlock">{{selectedDictionary.resourcesCount}}</td>
+            </tr>
+            <tr>
+              <td class="spacer" colspan="2"></td>
+            </tr>
+            <tr>
+              <td style="white-space:nowrap">Full-text Index (FTI)</td>
+              <!--            <span class="disabled-link">DELETE</span>-->
+              <td><a *ngIf="task==null && selectedDictionary.status=='ENABLED';else elseReindex" (click)="onReindex()">RE-INDEX</a>
+                <ng-template #elseReindex>
+                  <span class="disabled-link">RE-INDEX</span>
+                </ng-template>
+                <span *ngIf="task!=null">&nbsp;&nbsp;&nbsp;<span
+                  [ngStyle]="{'font-weight':'bold','font-size':'8pt','color':getTaskColor(task.status)}">{{task.status}}</span>&nbsp;{{task.progress}}
+                  %</span>
+              </td>
+            </tr>
+            <tr>
+              <td>FTI Size</td>
+              <td *ngIf="selectedDictionary.status=='ENABLED';else elseEmpty">{{selectedDictionary.ftIndexSize}}&nbsp;bytes</td>
+            </tr>
+            <tr>
+              <td class="spacer" colspan="2"></td>
+            </tr>
+            <tr>
+              <td>Total Size</td>
+              <td
+                *ngIf="selectedDictionary.status=='ENABLED';else elseEmpty">{{selectedDictionary.totalSize}}&nbsp;bytes
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-  <!--  <div class="table-row header">-->
-  <!--    <div class="ui-widget ui-widget-footer"><img style="cursor: pointer;" src="assets/connect.png"/></div>-->
-  <!--  </div>-->
+
 </div>

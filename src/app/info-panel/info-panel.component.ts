@@ -57,8 +57,8 @@ export class InfoPanelComponent extends DestroyableComponent implements OnInit {
   }
 
   onReindex() {
-    this.infoService.model.value.action = Action.REINDEX;
-    this.infoService.updateModel();
+    this.infoService.adminModel.value.action = Action.REINDEX;
+    this.infoService.updateAdminModel();
   }
 
   getTaskColor(status: TaskStatus) {
@@ -73,7 +73,7 @@ export class InfoPanelComponent extends DestroyableComponent implements OnInit {
   }
 
   onDownload(selectedDictionary: AdminDictionary, type: string) {
-    const url = this.baseApiUrl + "/admin/download?id=" + selectedDictionary.id + "&type=" + type;
+    const url = this.baseApiUrl + "/download?id=" + selectedDictionary.id + "&type=" + type;
     window.open(url);
   }
 
@@ -86,7 +86,7 @@ export class InfoPanelComponent extends DestroyableComponent implements OnInit {
   }
 
   onChangeStatus() {
-    this.infoService.model.value.action = Action.TOGGLE_DICTIONARY_STATE;
-    this.infoService.updateModel();
+    this.infoService.adminModel.value.action = Action.TOGGLE_DICTIONARY_STATE;
+    this.infoService.updateAdminModel();
   }
 }

@@ -216,3 +216,8 @@ a:hover {
 .pane-view-button-selected{
   filter: drop-shadow(2px 2px 2px gray);
 }
+
+.p-dialog .p-dialog-content{
+  padding: 0 0 2rem 0;
+  overflow: hidden;
+}

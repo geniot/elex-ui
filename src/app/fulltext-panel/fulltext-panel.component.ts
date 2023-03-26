@@ -4,6 +4,7 @@ import {FullTextHit} from "../model/fulltexthit";
 import {environment} from "../../environments/environment";
 import {Action} from "../model/action";
 import {DestroyableComponent} from "../destroyablecomponent";
+import {AdminModel} from "../model/adminmodel";
 
 @Component({
   selector: 'app-fulltext-panel',
@@ -29,6 +30,9 @@ export class FulltextPanelComponent extends DestroyableComponent implements OnIn
         this.searchResultsFor = model.searchResultsFor;
         this.searchResults = model.searchResults;
       }));
+    //for debugging purposes
+    // this.infoService.adminModel.value.action = Action.INIT;
+    // this.infoService.updateAdminModel();
   }
 
   onClick(text: string) {
@@ -44,7 +48,8 @@ export class FulltextPanelComponent extends DestroyableComponent implements OnIn
 
   onAdminClick($event: MouseEvent) {
     if ($event.ctrlKey) {
-      this.infoService.onAdmin();
+      this.infoService.adminModel.value.action = Action.INIT;
+      this.infoService.updateAdminModel();
     }
   }
 }

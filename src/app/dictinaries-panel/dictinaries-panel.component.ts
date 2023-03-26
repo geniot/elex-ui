@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AdminDictionary} from "../model/admindictionary";
 import {Task} from "../model/task";
 import {Action} from "../model/action";
@@ -50,8 +50,8 @@ export class DictinariesPanelComponent extends DestroyableComponent implements O
   }
 
   onReindexAll() {
-    this.infoService.model.value.action = Action.REINDEX_ALL;
-    this.infoService.updateModel();
+    this.infoService.adminModel.value.action = Action.REINDEX_ALL;
+    this.infoService.updateAdminModel();
   }
 
   private getTaskByFileName(tasks: Task[], fileName: string): Task | null {

@@ -1,7 +1,7 @@
 <div class="table container">
   <div class="table-row header">
     <div class="ui-widget ui-widget-header">
-      <img src="assets/books.png"/>
+      <img style="margin-left: 10px;" src="assets/books.png"/>
       &nbsp;&nbsp;<b>Dictionaries</b>
     </div>
   </div>
@@ -23,8 +23,11 @@
     </div>
   </div>
   <div class="table-row header">
-    <div class="ui-widget ui-widget-footer">
-      <img title="Re-index All" (click)="onReindexAll()" style="cursor:pointer;" src="assets/table_refresh.png"/>
+    <div id="narrow" style="padding-left: 10px;padding-right: 10px;">
+      <div class="table-row header">
+        <img title="Re-index All" [className]="'pane-view-button-selected'"
+             (click)="onReindexAll()" style="cursor:pointer;margin-left:10px;" src="assets/table_refresh.png"/>
+      </div>
     </div>
   </div>
 </div>

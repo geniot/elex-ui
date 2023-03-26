@@ -4,25 +4,25 @@ import {AboutModel} from "../model/aboutmodel";
 import {LayoutConfig} from "../model/layoutconfig";
 import {cloneDeep} from 'lodash-es'
 import {IOutputData} from "angular-split";
+import {AdminModel} from "../model/adminmodel";
+import {InfoService} from "../info.service";
+import {DestroyableComponent} from "../destroyablecomponent";
 
 @Component({
   selector: 'app-admin-dialog',
   templateUrl: './admin-dialog.component.html',
   styleUrls: ['./admin-dialog.component.css']
 })
-export class AdminDialogComponent implements OnInit, AfterContentInit {
-  keys: string[] = [];
-  values: string[] = [];
-
+export class AdminDialogComponent extends DestroyableComponent implements OnInit, AfterContentInit {
   splitLayoutLocalStorageName = 'elex-admin-splitLayoutLocalStorageName';
   config: LayoutConfig = new LayoutConfig();
   defaultConfig: LayoutConfig = new LayoutConfig();
   @ViewChild('focusElement') focusElement: ElementRef;
 
-  constructor(public ref: DynamicDialogRef, public dynamicDialogConfig: DynamicDialogConfig) {
-    let aboutModel: AboutModel = dynamicDialogConfig.data.aboutModel;
-    this.keys = Object.keys(aboutModel.abouts);
-    this.values = Object.values(aboutModel.abouts);
+  constructor(public ref: DynamicDialogRef,
+              public dynamicDialogConfig: DynamicDialogConfig,
+              public infoService: InfoService) {
+    super();
   }
 
   ngOnInit(): void {
@@ -31,6 +31,9 @@ export class AdminDialogComponent implements OnInit, AfterContentInit {
     } else {
       this.resetConfig()
     }
+    this.interval = setInterval(() => {
+      this.infoService.updateTaskExecutorModel();
+    }, 500);
   }
 
   resetConfig() {

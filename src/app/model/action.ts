@@ -1,4 +1,5 @@
 export enum Action {
+  NONE = "NONE",
   INIT = "INIT",
   INDEX = "INDEX",
   HISTORY_LINK = "HISTORY_LINK",
