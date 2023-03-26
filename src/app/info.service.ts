@@ -84,6 +84,7 @@ export class InfoService {
       taskExecutorModel => {
         for (let task of taskExecutorModel.tasks) {
           if (task.action == Action.POOL_UPDATE) {
+            this.adminModel.value.action = Action.POOL_UPDATE;
             this.updateAdminModel();
           }
         }
