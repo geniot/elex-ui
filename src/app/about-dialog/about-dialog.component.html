@@ -1,13 +1,13 @@
-<ng-template [ngIf]="keys.length>1" [ngIfElse]="singleLocale">
-  <div style="padding: 4px">
+<as-split direction="horizontal">
+
+  <as-split-area  [size]="100">
     <p-tabView>
       <p-tabPanel *ngFor="let key of keys;let index=index;" header="{{key}}">
         <p *ngFor="let line of values[index].split('\n')">{{line}}</p>
       </p-tabPanel>
     </p-tabView>
-  </div>
-</ng-template>
-<ng-template #singleLocale>
-  <p *ngFor="let line of values[0].split('\n')">{{line}}</p>
-</ng-template>
+
+  </as-split-area>
+
+</as-split>
 <input #focusElement type="text" style="opacity:0;filter:alpha(opacity=0);"/>

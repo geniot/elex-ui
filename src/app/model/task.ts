@@ -6,4 +6,5 @@ export class Task {
   action!: Action;
   status!: TaskStatus;
   progress!: number;
+  ftIndexSize!: string;
 }

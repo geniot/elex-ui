@@ -49,6 +49,8 @@ export class AppComponent extends DestroyableComponent {
           (model.action == Action.SEARCH && model.exactMatch)) {
           this.contentViewName = "article";
         }
+        //debugging
+        // this.infoService.onAbout(model.dictionaries[0]);
       }));
 
     this.subscriptions.push(this.infoService.ftModel.asObservable().subscribe(
@@ -64,7 +66,8 @@ export class AppComponent extends DestroyableComponent {
               aboutModel: aboutModel
             },
             header: aboutModel.dictionary.name,
-            width: '70%'
+            width: '70%',
+            height: '70%'
           });
           let sub: Subscription = ref.onClose.subscribe(() => {
             this.infoService.closeDialog.next(true);
