@@ -49,7 +49,9 @@ export class InfoPanelComponent extends DestroyableComponent implements OnInit {
         for (let task of taskExecutorModel.tasks) {
           if (task.fileName != null && task.fileName == this.infoService.selectedDictionary.value.fileName) {
             this.task = task;
-            this.infoService.selectedDictionary.value.ftIndexSize = task.ftIndexSize;
+            if (task.ftIndexSize != null && task.ftIndexSize.length > 0) {
+              this.infoService.selectedDictionary.value.ftIndexSize = task.ftIndexSize;
+            }
             return;
           }
         }
