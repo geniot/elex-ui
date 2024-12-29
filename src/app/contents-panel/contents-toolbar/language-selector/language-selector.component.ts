@@ -12,7 +12,7 @@ export class LanguageSelectorComponent extends DestroyableComponent implements O
   selectedSourceLanguageCode: string;
   selectedTargetLanguageCode: string;
 
-  constructor(private infoService: InfoService) {
+  constructor(public infoService: InfoService) {
     super();
   }
 

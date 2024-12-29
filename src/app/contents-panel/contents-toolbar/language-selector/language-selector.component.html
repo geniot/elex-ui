@@ -4,10 +4,11 @@
         name="sourceLanguageSelector"
         [ngModel]="selectedSourceLanguageCode"
         (ngModelChange)="onChangeSource($event)">
-  <option *ngFor="let sourceLanguage of sourceLanguages()" value="{{sourceLanguage}}">{{sourceLanguage}}</option>
+  <option *ngFor="let sourceLanguage of sourceLanguages()" value="{{sourceLanguage}}">{{ sourceLanguage }}</option>
 </select>
 
-<a (click)="onReverse()">
+<a *ngIf="this.infoService.model.value.dictionaries.length>0"
+   (click)="onReverse()">
   <img alt=""
        title="Reverse Translation Direction"
        style="vertical-align: text-bottom; margin-left: 2px;"
@@ -21,5 +22,5 @@
         name="targetLanguageSelector"
         [ngModel]="selectedTargetLanguageCode"
         (ngModelChange)="onChangeTarget($event)">
-  <option *ngFor="let targetLanguage of targetLanguages()" value="{{targetLanguage}}">{{targetLanguage}}</option>
+  <option *ngFor="let targetLanguage of targetLanguages()" value="{{targetLanguage}}">{{ targetLanguage }}</option>
 </select>
